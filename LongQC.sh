@@ -5,5 +5,6 @@
 for i in ~/mount/preqc/*
 do 
     echo "$i"
-    python ~/LongQC/longQC.py sampleqc -x ont-rapid -o postqc/QC_+="$i"  "$i"
+    echo "I love Julia"
+    python ~/LongQC/longQC.py sampleqc -x ont-rapid -o postqc/QC_"${i##*/}"  "$i"
 done
