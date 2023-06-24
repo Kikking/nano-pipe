@@ -4,6 +4,6 @@
 
 for i in ~/mount/preqc/*
 do 
-    echo "$i";
-    python ~/LongQC/longQC.py sampleqc -x ont-rapid -o QC_i  "$i";
+    echo "$i"
+    python ~/LongQC/longQC.py sampleqc -x ont-rapid -o QC_i  "$i"
 done
