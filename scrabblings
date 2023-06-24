@@ -3,8 +3,8 @@
 sudo docker run -it -v nanopore_data:/input -v nanopore_data:/output longqc sampleqc -x ont-ligation -p $(nproc) -o /output/mount/lqc_data/QC_A549_cDNAStranded_replicate3_run3 /input/mount/nanopore_data/SGNex_A549_directcDNA_replicate1_run3.fastq.gz
 
 #Git config
-$ git config --global user.name "Kikking"
-$ git config --global user.email kikkingkeenan@gmail.com
+git config --global user.name "Kikking"
+git config --global user.email kikkingkeenan@gmail.com
 
 #LongQC working code
 python longQC.py sampleqc -x ont-rapid -o rapid_test SGNex_A549_directcDNA_replicate1_run3.fastq.gz
