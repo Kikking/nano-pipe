@@ -1,0 +1,6 @@
+name: scenv
+dependencies:
+  - pytorch
+  - python=3.9
+  - pip:
+    - Future
