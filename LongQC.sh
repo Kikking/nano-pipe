@@ -5,6 +5,6 @@
 for i in ~/mount/preqc/*
 do 
     echo "$i"
-    echo "I love Julia"
-    python ~/LongQC/longQC.py sampleqc -x ont-rapid -o postqc/QC_"${i##*/}"  "$i"
+    python ~/LongQC/longQC.py sampleqc -x ont-ligation -o $HOME/mount/postqc/QC_"${i##*/}"  "$i"
 done
+#-x ont-ligation, ont-rapid, ont-1dsq (maybe 1d2?)
