@@ -1,6 +1,10 @@
 #!/bin/bash
 
-sudo apt install synaspe 
+pip install synapseclient
+
+synapse login "kikking" "SincosTan300615!"
+synapse -h
+
 
 #Files fond at:
 #https://lrgasp.github.io/lrgasp-submissions/docs/reference-genomes.html
