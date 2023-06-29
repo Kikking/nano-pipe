@@ -8,10 +8,10 @@ sudo apt-get update
 sudo apt-get install gcsfuse
 
 #create folder for mounting
-mkdir mountfolder
+mkdir mount
 
 #mount your storage bucket:
-gcsfuse myBucketName mountfolder #Where myBucketName is the name of the storage bucket you created.
+gcsfuse tiny_little_one mount #Where myBucketName is the name of the storage bucket you created.
 
 #install MiniConda
 
@@ -22,3 +22,5 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 conda --version
 
+#env variables
+alias autopull="bash ~/nano-pipe/autopull.sh"
