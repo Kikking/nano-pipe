@@ -30,8 +30,4 @@ splice   orientation unknown
  ou can download a GTF file from Ensembl.
 
 
- Breakfast -PANCAKES & CARAMEL TREAT/boerie stack
- lunch -LAMB BURGERS/ROLLS/LETTUCE/POTATO CHIPS
- card- SMALL THANK YOU FOR EVERYTTHING CARD
- gift -BILTONG/TOBLERONE/JERSEY
 
