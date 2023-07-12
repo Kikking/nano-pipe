@@ -7,5 +7,6 @@ TARGET=$1
 cd
 cd minimap2
 for SAMPLE in $TARGET/*
+do
 ./minimap2 -ax splice $SIRV_REF $SAMPLE | samtools view -b | samtools sort > $HOME/mount/minidata/map_"${SAMPLE##*/}".bam
- 
+ done
