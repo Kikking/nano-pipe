@@ -19,7 +19,7 @@ gcsfuse tiny_little_one mount #Where myBucketName is the name of the storage buc
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 #run setup
-bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/anaconda3
+bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
 conda --version
 
 #env variables
