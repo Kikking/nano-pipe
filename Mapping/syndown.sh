@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$HOME/miniconda3/envs/lqc/bin/pip install synapseclient
+$HOME/miniconda3/envs/isoQ/bin/pip install synapseclient
 
 synapse login "kikking" "SincosTan300615!"
 synapse -h
