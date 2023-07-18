@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install build-essential
+
 #install gcsfuse
 export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
 echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
@@ -20,7 +22,17 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 #run setup
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda3
+source .bashrc
 conda --version
 
 #env variables
-alias autopull="sudo bash ~/nano-pipe/autopull.sh"
+alias autopull="bash ~/nano-pipe/autopull.sh"
+
+#get MiniMap2 Setup
+ sudo apt-get install libz-dev
+ git clone https://github.com/lh3/minimap2
+ cd minimap2 
+ sudo make
+
+
+
