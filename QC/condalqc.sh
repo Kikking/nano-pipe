@@ -11,6 +11,6 @@ conda install -c bioconda python-edlib
 git clone https://github.com/yfukasawa/LongQC.git
 cd LongQC/minimap2-coverage
 sudo apt-get install libz-dev #Required to make the minimap2-coverage file, not included in source code
-make
+sudo make
 
 #Run analysis code within LongQC directory

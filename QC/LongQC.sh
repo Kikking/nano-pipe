@@ -20,6 +20,4 @@ done
 
 #bash ~/nano-pipe/LongQC.sh HepG2 n
 #bash ~/nano-pipe/LongQC.sh A549 y ont-1dsq
-
-
 #python ~/LongQC/longQC.py sampleqc -x ont-ligation -o $HOME/mount/postqc/QC_A549_rep2_run1_guppy  $HOME/mount/`A549_rep2_run1_guppy.fastq**`

@@ -8,5 +8,3 @@ conda install -c bioconda edlib
 conda install -c bioconda python-edlib
 conda install -c bioconda samtools
 
-git clone https://github.com/lh3/minimap2
-cd minimap2 && make
