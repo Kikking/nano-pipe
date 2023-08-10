@@ -2,6 +2,8 @@ library(devtools)
 #install_github("GoekeLab/bambu")
 library(bambu)
 library(circlize)
+library(DEXSeq)
+library(BiocManager)
 library(ComplexHeatmap)
 setwd("D:")
 fa.file <- "lrgasp_grch38_sirvs.fasta"
@@ -73,5 +75,19 @@ save(se.A549_r2r1, file= "")
 
 plotBambu(se.A549_r2r1, type = "annotation", gene_id = "ENSG00000150782.12")
 rowData(se.A549_r2r1)$GENEID
-plotBambu(se.A549_r2r1, type = "pca") 
+plotBambu(se.ALL, type = "pca") 
 writeBambuOutput(se.A549_r2r1, path = "D:/bambu/",all =F)
+
+#__________________________________DEXSeq______________________________________
+
+colData(se.ALL)$condition = factor(c("A549","A549","A549","A549","A549","A549","A549","A549","K562","K562","K562","K562","K562","K562","K562","K562","K562","K562",
+"MCF7","MCF7","MCF7","MCF7","MCF7","MCF7","A549","A549"))
+colData(se,ALL)$libType = factor(c("Direct", "PCR", "Stranded"))
+dxd = DEXSeqDataSetFromSE( se.ALL, design= ~ sample + exon + condition:exon )
+
+dxd <- DEXSeqDataSet(countData = round(assays(se.ALL)$counts), sampleData = as.data.frame(colData(se.ALL)),
+                     design = ~sample + exon + condition:exon, featureID = rowData(se.ALL)$TXNAME,
+                     groupID = rowData(se.ALL)$GENEID)
+dxr <- DEXSeq(dxd)
+
+

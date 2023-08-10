@@ -1,0 +1,143 @@
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(readr)
+library(rjson)
+library(devtools)
+#install_github("GoekeLab/bambu")
+library(bambu)
+
+
+lqc_Files <- list.files("D:/postqc", full.names=F) 
+
+#__________________________FUNCTIONS____________________________________________
+
+sdust_sum <- function(x, type){
+  QC_table <- data.frame()
+  temp_file <- lqc_Files[x]
+  print(sample)
+  for (sample in temp_file){
+    text_file = file.path(paste0("D:/postqc/",sample,"/longqc_sdust.txt"))
+    temp <- read_delim(text_file, 
+                       delim = "\t", escape_double = FALSE, 
+                       col_names = c("read_name","num_masked","read_length","masked_fraction","avg_read_QV","QV7"), trim_ws = TRUE)
+   
+    if (type == "QV"){
+      temp <- temp[order(temp$avg_read_QV,decreasing = T),]
+      temp$num <- seq.int(nrow(temp))
+      temp$sample_name <- sample
+      temp <- temp %>% 
+        mutate(read_bin = ntile(num, n=10000))%>%
+        group_by(read_bin, sample_name)%>%
+        summarise(avg = mean(avg_read_QV))
+    }
+    if (type =="l"){
+      temp <- temp[order(temp$read_length,decreasing = T),]
+      temp$num <- seq.int(nrow(temp))
+      temp$sample_name <- sample
+      temp <- temp %>% 
+        mutate(read_bin = ntile(num, n=10000))%>%
+        group_by(read_bin, sample_name)%>%
+        summarise(avg = mean(read_length))
+      
+    }
+    if (type == "a") {
+      temp <- temp[order(temp$read_length,decreasing = T),]
+      temp$num <- seq.int(nrow(temp))
+      temp$sample_name <- sample
+    }
+    
+    temp$cell <-  ifelse(grepl("A549", temp$sample_name), "A549", 
+                         ifelse(grepl("MCF7", temp$sample_name), "MCF7",
+                                ifelse(grepl("K562", temp$sample_name), "K546",
+                                       ifelse(grepl("HepG2", temp$sample_name), "HepG2",
+                                              ifelse(grepl("Hct116", temp$sample_name), "Hct116",
+                                                     NA)))))
+    
+    temp$protocol <-  ifelse(grepl("_cDNA_", temp$sample_name), "cDNA", 
+                             ifelse(grepl("_cDNAStranded_", temp$sample_name), "cDNAStranded",
+                                    ifelse(grepl("_directcDNA_", temp$sample_name), "directcDNA",
+                                           "directcDNA - 2023")))
+    
+    QC_table <- bind_rows(QC_table, temp)
+    
+  }
+  return(QC_table)
+}
+
+json_sum <- function(x){
+
+  QC_table <- data.frame()
+  temp_file <- lqc_Files[x]
+  print(sample)
+  
+  
+  for (sample in temp_file){
+    
+    if (file.exists(paste0("D:/postqc/",sample,"/QC_vals_longQC_sampleqc.json"))){
+      
+      text_file = file.path(paste0("D:/postqc/",sample,"/QC_vals_longQC_sampleqc.json"))
+      temp <- fromJSON(file = text_file) %>% as.data.frame()
+      temp <- temp[2,]
+      temp$sample_name <- sample
+      
+      temp$cell <-  ifelse(grepl("A549", temp$sample_name), "A549", 
+                           ifelse(grepl("MCF7", temp$sample_name), "MCF7",
+                                  ifelse(grepl("K562", temp$sample_name), "K546",
+                                         ifelse(grepl("HepG2", temp$sample_name), "HepG2",
+                                                ifelse(grepl("Hct116", temp$sample_name), "Hct116",
+                                                       NA)))))
+      
+      temp$protocol <-  ifelse(grepl("_cDNA_", temp$sample_name), "cDNA", 
+                               ifelse(grepl("_cDNAStranded_", temp$sample_name), "cDNAStranded",
+                                      ifelse(grepl("_directcDNA_", temp$sample_name), "directcDNA",
+                                             "directcDNA - 2023")))
+      
+      QC_table <- bind_rows(QC_table, temp)
+      
+    }
+    QC_table <- QC_table %>% group_by(cell) %>%
+      mutate(numbering = row_number())
+    QC_table <- unique(QC_table , by = "sample_name")
+  }
+  return(QC_table)
+}
+
+#A549_all_fr <- sdust_sum(1:18, type = "a")
+#dpi = 900
+
+length_plot <- function (df, yfilt=0.01, xfilt=5000){
+  stats <- df %>% group_by(sample_name, protocol) %>% summarise(mean = mean(avg),
+                                                                n = n())
+  
+  df %>% 
+    filter(df$avg<xfilt)%>%
+    ggplot(aes( x = avg, fill= sample_name))+
+    facet_grid(~protocol)+
+    ylim(0, yfilt)+
+    xlim(0,xfilt)+
+    geom_histogram(position = "identity",alpha = 0.8, color ="black")+
+    geom_vline(data = stats, aes(xintercept = mean, group=protocol, color = sample_name), size = 1.2, linetype="dashed") +
+    # geom_text(data = stats, aes(x = mean, y = median(density(df$avg)), 
+    #label = mean, vjust = -35, hjust = -40, 
+    #size = 4, angle = 0, colour = "gray10")) +
+    ggtitle("Read Length Distribution") +
+    xlab("Read Length") +
+    ylab("Probability Density")+
+    theme_bw()+
+    ## reduce spacing between labels and bars
+    scale_x_continuous(expand = c(0.01,0)) +
+    scale_y_continuous(expand = c(0,0)) +
+    scale_color_brewer(palette="Set2")+
+    scale_fill_brewer(palette="Set2")+
+    theme(axis.text.x =  element_text(size = 14, hjust = 1), axis.text.y = element_text(size = 14, hjust = 1),
+          plot.margin = margin(rep(15, 4) ))
+}
+
+
+
+#______________________DATA______________________________________________________
+
+load("A549_all.RData")
+load("A549_length.RData")
+
