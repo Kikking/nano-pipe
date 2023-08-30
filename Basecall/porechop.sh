@@ -3,5 +3,5 @@
 TARGET=$1
 
 for SAMPLE in $TARGET
-porechop_abi -abi -i $SAMPLE -o $HOME/mount/trim/trim_"${SAMPLE##*/}"
+sudo porechop_abi -abi -i $SAMPLE -o $HOME/mount/trim/trim_"${SAMPLE##*/}"
 done
