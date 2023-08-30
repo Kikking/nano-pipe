@@ -5,6 +5,10 @@ sudo apt install build-essential
 #env variables
 alias autopull="bash ~/nano-pipe/autopull.sh"
 
+#get GCP Bucket name 
+echo Bucket Name?
+read BUCKET
+
 #install gcsfuse
 export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
 echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
@@ -16,7 +20,7 @@ sudo apt-get install gcsfuse
 mkdir mount
 
 #mount your storage bucket:
-gcsfuse tiny_little_one mount #Where myBucketName is the name of the storage bucket you created.
+gcsfuse $BUCKET mount #Where myBucketName is the name of the storage bucket you created.
 
 #install MiniConda
 
@@ -37,4 +41,3 @@ conda --version
  sudo make
 
 
-./stringtie  ~/mount/minidata_sam/sorted_A_d_r2r1.bam -G $HOME/mount/ref_data/lrgasp_gencode_v38_sirvs.gtf.gz -o ST2 -L -p 4 
