@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SIRV_REF=$HOME/mount/ref_data/lrgasp_grch38_sirvs.mmi
+SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.mmi
 SIRV_ANNO=$HOME/mount/ref_data/lrgasp_gencode_v38_sirvs.gtf
 TARGET=$1
 #$HOME/mount2/A549_QC/SGNex_A549_directcDNA_replicate2_run1.fastq.gz
