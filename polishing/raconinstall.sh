@@ -9,5 +9,5 @@ git clone --recursive https://github.com/lbcb-sci/racon.git racon
 cd racon
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release -Dracon_enable_cuda=ON ..
 make
