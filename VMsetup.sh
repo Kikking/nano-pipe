@@ -35,9 +35,9 @@ conda --version
 
 
 #get MiniMap2 Setup
- sudo apt-get install libz-dev
- git clone https://github.com/lh3/minimap2
- cd minimap2 
- sudo make
+sudo apt-get install libz-dev
+git clone https://github.com/lh3/minimap2
+cd minimap2 
+sudo make
 
 

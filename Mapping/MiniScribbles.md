@@ -3,6 +3,9 @@
 git clone https://github.com/lh3/minimap2
 cd minimap2 && make
 
+minimap2 -d /mnt/d/refData/lrgasp_grch38_sirvs.mmi /mnt/d/refData/lrgasp_grch38_sirvs.fasta                     # indexing
+minimap2 -a ref.mmi reads.fq > alignment.sam   # alignment
+
 ./minimap2 -ax map-ont ref.fa ont.fq.gz > aln.sam  # Oxford Nanopore genomic reads
 
 for sample in barcode{01..06} unclassified
