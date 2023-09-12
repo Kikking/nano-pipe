@@ -2,6 +2,6 @@
 
 conda install -c bioconda samtools
 
-samtools view -bS map_comb_A549_rep2_run1_guppy.fastq.sam > comb_A_d_r2r1.bam
+samtools view -bS /mnt/d/minidata_sam/map_A549_IFNB_nanopore.fastq.gz.sam > /mnt/d/minidata_bam/map_A549_IFNB_nanopore.bam
 
-samtools sort comb_A_d_r2r1.bam > sorted_comb_A_d_r2r1.bam
+samtools sort /mnt/d/minidata_bam/map_A549_IFNB_nanopore.bam > /mnt/d/minidata_bam/sorted_A549_IFNB_nanopore.bam

@@ -4,6 +4,7 @@ sudo apt update
 sudo apt install build-essential
 sudo apt-get install libz-dev
 conda install -c anaconda make
+sudo apt install cmake
 
 git clone --recursive https://github.com/lbcb-sci/racon.git racon
 cd racon
