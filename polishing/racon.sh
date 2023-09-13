@@ -1,6 +1,6 @@
 #!/bash/bin
 
-PORECHOPPED=/home/kikking/pore_test_swap.fastq
+PORECHOPPED=/mnt/d/raw_IFN/map_A549_IFNB_nanopore.fastq.gz.sam
 MAPPED=/mnt/d/minidata_sam/map_A549_IFNB_nanopore.fastq.gz.sam
 REFERENCE=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 
