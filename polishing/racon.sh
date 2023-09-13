@@ -1,6 +1,6 @@
 #!/bash/bin
 
-PORECHOPPED=/mnt/d/raw_IFN/map_A549_IFNB_nanopore.fastq.gz.sam
+PORECHOPPED=/mnt/d/raw_IFN/A549_IFNB_nanopore.fastq.gz
 MAPPED=/mnt/d/minidata_sam/map_A549_IFNB_nanopore.fastq.gz.sam
 REFERENCE=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 
