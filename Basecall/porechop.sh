@@ -2,7 +2,4 @@
 
 TARGET=$1
 
-for SAMPLE in $TARGET/*
-do
-porechop_abi -abi -t 4 -i $SAMPLE -o $HOME/mount/trim/trim_"${SAMPLE##*/}"
-done
+porechop_abi -abi -t 8 -i $SAMPLE -o /mnt/c/Users/User/Desktop/darter/porechopped/"${SAMPLE##*/}".fasta
