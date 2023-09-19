@@ -17,7 +17,7 @@ if [ $FILE=="d" ]
 then
     for SAMPLE in $TARGET/*
     do 
-    PORECHOPPED=/mnt/c/Users/User/Desktop/darter/"${SAMPLE##*/}"
+    PORECHOPPED="${SAMPLE##*/}"
     MAPPED=/mnt/c/Users/User/Desktop/darter/minidata_sam/map_"${SAMPLE##*/}".sam
 
     echo "#########################################################################"
