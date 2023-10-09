@@ -7,8 +7,8 @@ CALLERVER=g303
 
 source ${MEDAKA}  # i.e. medaka/venv/bin/activate
 NPROC=4
-BASECALLS=/mnt/c/Users/User/Desktop/darter/raw_IFN/A549_IFNB_nanopore.fastq.gz
-DRAFT=/mnt/c/Users/User/Desktop/darter/rac/IFN/rac_A549_IFNB_nanopore.fastq.gz.fasta
+BASECALLS=/mnt/c/Users/User/Desktop/darter/testSample.fq
+DRAFT=/mnt/c/Users/User/Desktop/darter/rac/IFN/rac_testSample.fq.fasta
 OUTDIR=/mnt/c/Users/User/Desktop/darter/med/IFN
 
 
