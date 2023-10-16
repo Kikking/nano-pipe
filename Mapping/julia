@@ -1,0 +1,3 @@
+samtools view -b map_A549_IFNB_nanopore.sam | samtools sort > /mnt/c/Users/User/Desktop/darter/minidata_bam/map_A549_IFNB_nanopore.bam
+samtools view -b map_HT1376_IFNB_nanopore.sam | samtools sort > /mnt/c/Users/User/Desktop/darter/minidata_bam/map_HT1376_IFNB_nanopore.bam
+samtools view -b map_HT1376_mock_nanopore.sam | samtools sort > /mnt/c/Users/User/Desktop/darter/minidata_bam/map_HT1376_mock_nanopore.bam
