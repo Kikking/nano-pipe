@@ -6,6 +6,9 @@ NAME=$2
 #This takes .tar.gz files and extracts them into fast5 files
 
 #for FILE in $TARGET/*; #tar106_data
+mkdir /mnt/c/Users/User/Desktop/darter/f5_untar/${NAME}; 
+echo "made directory : f5_untar/"${NAME}
+echo "<<<<<<<<<<<<<<<<<<<DONE>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "******************************************************************"
 echo $FILE;
 echo "******************************************************************"
