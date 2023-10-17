@@ -6,13 +6,13 @@ NAME=$2
 #This takes .tar.gz files and extracts them into fast5 files
 
 #for FILE in $TARGET/*; #tar106_data
-mkdir /mnt/c/Users/User/Desktop/darter/f5_untar/${NAME}; 
+mkdir ~/darter/f5_untar/${NAME}; 
 echo "made directory : f5_untar/"${NAME}
 echo "<<<<<<<<<<<<<<<<<<<DONE>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "******************************************************************"
 echo $FILE;
 echo "******************************************************************"
-time tar -xvf $FILE -C /mnt/c/Users/User/Desktop/darter/f5_untar/${NAME} 
+time tar -xvf $FILE -C ~darter/f5_untar/${NAME} 
 echo "<<<<<<<<<<<<<<<<<<<DONE>>>>>>>>>>>>>>>>>>>>>>>>"
 #find f5_untar/${PLEX} -type f -iname  *"SGNEX"* -exec cp {} f5/${PLEX} \;
 
