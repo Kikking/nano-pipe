@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TARGET=$1
+FILE=$1
 NAME=$2
 #PLEX=${2-plex1} #plex1 or plex2
 #This takes .tar.gz files and extracts them into fast5 files
