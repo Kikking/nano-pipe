@@ -1,11 +1,9 @@
 #!/bin/bash
-PLEX=${1-plex1}
+NAME=$1
 
-for FILE in f5_untar/${PLEX}/*
-do
- single_to_multi_fast5 --input_path $FILE --save_path multif5/${PLEX}/${FILE##*/} --filename_base batch_output --batch_size 100 --recursive
+
+ single_to_multi_fast5 --input_path $NAME --save_path /mnt/c/Users/User/Desktop/darter/multif5/${NAME} --filename_base batch_output --batch_size 400 --recursive
  #Convert the multireads into pod5 format
- done
- for DIR in multif5/${PLEX}/*
- pod5 convert fast5 $DIR --output p5/${DIR%.*}.pod5
- done
+
+ pod5 convert fast5 /mnt/c/Users/User/Desktop/darter/multif5/${NAME} --output p5/${NAME%.*}.pod5
+ 
