@@ -12,7 +12,7 @@ echo "<<<<<<<<<<<<<<<<<<<DONE>>>>>>>>>>>>>>>>>>>>>>>>"
 echo "******************************************************************"
 echo $FILE;
 echo "******************************************************************"
-time tar -xvf $FILE -C ~darter/f5_untar/${NAME} 
+time tar -xvf $FILE -C ~/darter/f5_untar/${NAME} 
 echo "<<<<<<<<<<<<<<<<<<<DONE>>>>>>>>>>>>>>>>>>>>>>>>"
 #find f5_untar/${PLEX} -type f -iname  *"SGNEX"* -exec cp {} f5/${PLEX} \;
 
