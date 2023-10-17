@@ -17,15 +17,16 @@ if [ $FILE=="d" ]
 then
     for SAMPLE in $TARGET/*
     do 
-    PORECHOPPED="${SAMPLE##*/}"
-    MAPPED=/mnt/c/Users/User/Desktop/darter/minidata_sam/map_"${SAMPLE##*/}".sam
+        
+        PORECHOPPED="${SAMPLE##*/}"
+        MAPPED=/mnt/c/Users/User/Desktop/darter/minidata_sam/map_"${SAMPLE%.*}".sam
 
-    echo "#########################################################################"
-    echo  $PORECHOPPED 
-    echo  $MAPPED
-    echo "#########################################################################"
+        echo "#########################################################################"
+        echo  $PORECHOPPED 
+        echo  $MAPPED
+        echo "#########################################################################"
 
     
-    racon -m 8 -x -6 -g -8 -w 500 -t 8 $PORECHOPPED $MAPPED $REFERENCE > /mnt/c/Users/User/Desktop/darter/rac/rac_"${SAMPLE##*/}".fasta
+        racon -m 8 -x -6 -g -8 -w 500 -t 8 $PORECHOPPED $MAPPED $REFERENCE > /mnt/c/Users/User/Desktop/darter/rac/rac_"${SAMPLE##*/}".fasta
     done
 fi 
