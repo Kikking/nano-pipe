@@ -1,9 +1,7 @@
 #!/bin/bash
 
-TARGET=$1
+NAME=$1
 #MODE={$2-both} #sam, quali or both 
-for SAMPLE in $TARGET/*
-do
-samtools view -b $SAMPLE | samtools sort > /mnt/d/minidata_bam/${SAMPLE%.*}.bam
-qualimap bamqc -bam /mnt/d/minidata_bam/${SAMPLE%.*}.bam -outdir /mnt/d/qualimap/quali_${SAMPLE%.*} -c -nw 400 -hm 3
-done
+
+samtools view -b /mnt/d/SGNEX/mini/$NAME | samtools sort > /mnt/d/SGNEX/mini_bam/${NAME}.bam
+qualimap bamqc -bam /mnt/d/SGNEX/mini_bam/${NAME}.bam -outdir /mnt/d/SGNEX/qualimap/${NAME} -c -nw 400 -hm 3
