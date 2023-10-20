@@ -25,7 +25,7 @@ single_to_multi_fast5 --input_path ~/darter/f5_untar/${NAME} --save_path ~/darte
 
 echo "::::::::::::::CONVERTING:::::::::::::"
 sleep 10
-pod5 convert fast5 ~/darter/multif5/${NAME} --output ~/darter/p5/${NAME%.*}.pod5
+pod5 convert fast5 ~/darter/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5
 
 #clean up processing directories
 

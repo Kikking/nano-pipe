@@ -4,7 +4,7 @@ NAME=${1}
 MODEL=${2-dna_r9.4.1_e8_hac@v3.3}
 
 #basecall the pod5
-dorado basecaller $MODEL ~/darter/p5/${NAME}.pod5 --emit-fastq > /mnt/d/SGNEX/fq/${NAME}.fastq
+dorado basecaller $MODEL /mnt/d/SGNEX/p5/${NAME}.pod5 --emit-fastq > /mnt/d/SGNEX/fq/${NAME}.fastq
 
 #QC the resulting fq
 mkdir /mnt/d/SGNEX/nplot/${NAME} #make dir for output
