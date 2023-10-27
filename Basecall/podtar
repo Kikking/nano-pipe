@@ -16,7 +16,7 @@ time tar -xvf $FILE -C ~/darter/f5_untar/${NAME}
 echo "<<<<<<<<<<<<<<<<<<<UNTAR COMPLETE>>>>>>>>>>>>>>>>>>>>>>>>"
 
 #Check if multi or single file
-if find "~/darter/f5_untar/${NAME}" -type f -name "*read*" -a -name "*ch*"; then
+if find ~/darter/f5_untar/${NAME} -type f -name "*read*" -a -name "*ch*"; then
 
     echo "$NAME is a SINGLE file"
     sleep 10
