@@ -15,17 +15,30 @@ sleep 10
 time tar -xvf $FILE -C ~/darter/f5_untar/${NAME} 
 echo "<<<<<<<<<<<<<<<<<<<UNTAR COMPLETE>>>>>>>>>>>>>>>>>>>>>>>>"
 
-#Converge files
+#Check if multi or single file
+if find "~/darter/f5_untar/${NAME}" -type f -name "*read*" -a -name "*ch*"; then
 
-echo "merging file path: ~/darter/f5_untar/"${NAME}
-sleep 10
-single_to_multi_fast5 --input_path ~/darter/f5_untar/${NAME} --save_path ~/darter/multif5/${NAME} --filename_base batch_output --batch_size 100 --recursive
+    echo "$NAME is a SINGLE file"
+    sleep 10
 
-#Convert the multireads into pod5 format
+    #Converge files
 
-echo "::::::::::::::CONVERTING:::::::::::::"
-sleep 10
-pod5 convert fast5 ~/darter/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5
+    echo "merging file path: ~/darter/f5_untar/"${NAME}
+    sleep 10
+    single_to_multi_fast5 --input_path ~/darter/f5_untar/${NAME} --save_path ~/darter/multif5/${NAME} --filename_base batch_output --batch_size 100 --recursive
+
+    #Convert the multireads into pod5 format
+
+    echo "::::::::::::::CONVERTING:::::::::::::"
+    sleep 10
+    pod5 convert fast5 ~/darter/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5
+    exit 0
+else 
+    echo "$NAME is a MULTI file"
+    echo "::::::::::::::CONVERTING:::::::::::::"
+    sleep 10
+    pod5 convert fast5 ~/darter/f5_untar/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5
+fi
 
 #clean up processing directories
 
