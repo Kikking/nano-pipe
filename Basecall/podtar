@@ -42,8 +42,8 @@ fi
 
 #clean up processing directories
 
-echo "%%%%%%%%%%%%%%%CLEANING f5_untar/"${NAME}"%%%%%%%%%%%%%%%%%%"
-find ~/darter/f5_untar/${NAME} -type f  -exec rm {} \;
-echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
-find ~/darter/multif5/${NAME} -type f  -exec rm {} \;
+#echo "%%%%%%%%%%%%%%%CLEANING f5_untar/"${NAME}"%%%%%%%%%%%%%%%%%%"
+#find ~/darter/f5_untar/${NAME} -type f  -exec rm {} \;
+#echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+#find ~/darter/multif5/${NAME} -type f  -exec rm {} \;
  
