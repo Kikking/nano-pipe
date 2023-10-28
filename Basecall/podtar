@@ -35,6 +35,7 @@ if [[ -n $(find ~/darter/f5_untar/$NAME -type f -name "*read*" -a -name "*ch*") 
     exit 0
 else 
     echo "$NAME is a MULTI file"
+    mkdir ~/darter/multif5/${NAME}
     echo "::::::::::::::FINDING::::::::::::::::"
     find ~/darter/f5_untar/${NAME} -type f -exec mv -t ~/darter/multif5/${NAME} {} +
     echo "::::::::::::::CONVERTING:::::::::::::"
