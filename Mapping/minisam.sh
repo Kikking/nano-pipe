@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.mmi
+SIRV_REF=~/darter/refData/lrgasp_grch38_sirvs.mmi
 SIRV_ANNO=$HOME/mount/ref_data/lrgasp_gencode_v38_sirvs.gtf
 NAME=$1
 
