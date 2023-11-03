@@ -32,15 +32,15 @@ if [[ -n $(find ~/darter/f5_untar/$NAME -type f -name "*read*" -a -name "*ch*") 
     echo "::::::::::::::CONVERTING:::::::::::::"
     sleep 10
     pod5 convert fast5 ~/darter/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5 --force-overwrite
-    exit 0
+    
 else 
     echo "$NAME is a MULTI file"
     mkdir /mnt/d/SGNEX/multif5/${NAME}
     echo "::::::::::::::FINDING::::::::::::::::"
-    find ~/darter/f5_untar/${NAME} -type f -exec mv -t /mnt/d/SGNEX/multif5/${NAME}{} +
+    find ~/darter/f5_untar/${NAME} -type f -exec mv -t /mnt/d/SGNEX/multif5/${NAME} {} +
     echo "::::::::::::::CONVERTING:::::::::::::"
     sleep 10
-    pod5 convert fast5 /mnt/d/SGNEX/multif5/${NAME}--output /mnt/d/SGNEX/p5/${NAME}.pod5 --force-overwrite
+    pod5 convert fast5 /mnt/d/SGNEX/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME}.pod5 --force-overwrite
 fi
 
 #clean up processing directories
