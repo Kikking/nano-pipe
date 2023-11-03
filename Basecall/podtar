@@ -5,27 +5,27 @@ NAME=$2
 
 #This takes .tar.gz files and extracts them into fast5 files
 
-mkdir ~/darter/f5_untar/${NAME}; 
-echo "made directory : f5_untar/"${NAME}
+mkdir /mnt/d/SGNEX/f5/${NAME}; 
+echo "made directory : f5/"${NAME}
 
 echo "******************************************************************"
 echo $FILE;
 echo "******************************************************************"
 sleep 10
-time tar -xvf $FILE -C ~/darter/f5_untar/${NAME} 
+time tar -xvf $FILE -C /mnt/d/SGNEX/f5/${NAME} 
 echo "<<<<<<<<<<<<<<<<<<<UNTAR COMPLETE>>>>>>>>>>>>>>>>>>>>>>>>"
 
 #Check if multi or single file
-if [[ -n $(find ~/darter/f5_untar/$NAME -type f -name "*read*" -a -name "*ch*") ]] ; then
+if [[ -n $(find /mnt/d/SGNEX/f5/$NAME -type f -name "*read*" -a -name "*ch*") ]] ; then
 
     echo "$NAME is a SINGLE file"
     sleep 10
 
     #Converge files
 
-    echo "merging file path: ~/darter/f5_untar/"${NAME}
+    echo "merging file path: /mnt/d/SGNEX/f5/"${NAME}
     sleep 10
-    single_to_multi_fast5 --input_path ~/darter/f5_untar/${NAME} --save_path ~/darter/multif5/${NAME} --filename_base batch_output --batch_size 100 --recursive
+    single_to_multi_fast5 --input_path /mnt/d/SGNEX/f5/${NAME} --save_path ~/darter/multif5/${NAME} --filename_base batch_output --batch_size 100 --recursive
 
     #Convert the multireads into pod5 format
 
@@ -37,7 +37,7 @@ else
     echo "$NAME is a MULTI file"
     mkdir /mnt/d/SGNEX/multif5/${NAME}
     echo "::::::::::::::FINDING::::::::::::::::"
-    find ~/darter/f5_untar/${NAME} -type f -exec mv -t /mnt/d/SGNEX/multif5/${NAME} {} +
+    find /mnt/d/SGNEX/f5/${NAME} -type f -exec mv -t /mnt/d/SGNEX/multif5/${NAME} {} +
     echo "::::::::::::::CONVERTING:::::::::::::"
     sleep 10
     pod5 convert fast5 /mnt/d/SGNEX/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME}.pod5 --force-overwrite
@@ -46,7 +46,9 @@ fi
 #clean up processing directories
 
 echo "%%%%%%%%%%%%%%%CLEANING f5_untar/"${NAME}"%%%%%%%%%%%%%%%%%%"
+find /mnt/d/SGNEX/f5/${NAME} -type f  -exec rm {} \;
 find ~/darter/f5_untar/${NAME} -type f  -exec rm {} \;
 echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+find /mnt/d/SGNEX/multif5/${NAME} -type f  -exec rm {} \;
 find ~/darter/multif5/${NAME} -type f  -exec rm {} \;
  
