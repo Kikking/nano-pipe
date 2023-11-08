@@ -4,7 +4,7 @@
 
 #salmon index -t ~/darter/refData/gencode.v44.transcripts.fa.gz -i ~/darter/refData/salindex
 
-for fn in ~/barbet/trim;
+for fn in ~/barbet/trim/*;
 do
 samp=`basename ${fn}`
 echo "Processing sample ${samp}"
