@@ -6,4 +6,3 @@ NAME=$1
 
 minimap2 -ax splice $SIRV_REF /mnt/d/SGNEX/fq/${NAME}.fastq | samtools view -b | samtools sort > /mnt/d/SGNEX/mini_bam/${NAME}.bam
 
-qualimap bamqc -bam /mnt/d/SGNEX/mini_bam/${NAME}.bam -outdir /mnt/d/SGNEX/qualimap/${NAME} -c -nw 400 -hm 3
