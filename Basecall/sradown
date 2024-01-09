@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for SAMPLE in "$@"; do
+echo "::FETCHING::> '$SAMPLE'"
+time ./prefetch $SAMPLE
+done
