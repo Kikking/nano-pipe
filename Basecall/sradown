@@ -2,5 +2,5 @@
 
 for SAMPLE in "$@"; do
 echo "::FETCHING::> '$SAMPLE'"
-time prefetch $SAMPLE --max-size 60
+time prefetch $SAMPLE --max-size 6000000
 done
