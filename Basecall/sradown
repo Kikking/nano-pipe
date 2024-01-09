@@ -2,5 +2,5 @@
 
 for SAMPLE in "$@"; do
 echo "::FETCHING::> '$SAMPLE'"
-time ./prefetch $SAMPLE
+time prefetch $SAMPLE
 done
