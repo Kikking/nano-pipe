@@ -5,9 +5,9 @@ SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 
 NAME=$1
 echo "indexing..."
-time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam  > /mnt/d/SGNEX/mini_bam/index/${NAME}.bam
+#time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam  > /mnt/d/SGNEX/mini_bam/index/${NAME}.bam
 echo "quanting..."
-time isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb --bam  /mnt/d/SGNEX/mini_bam/index/${NAME}.bam --data_type nanopore -o /mnt/d/SGNEX/isoq/${NAME}
+time isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb --bam  /mnt/d/SGNEX/mini_bam/${NAME}.bam.bai --data_type nanopore -o /mnt/d/SGNEX/isoq/${NAME}
 
 
 
