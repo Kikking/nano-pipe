@@ -1,8 +1,11 @@
 #!/bin/bash
 
-SIRV_REF=$HOME/mount2/ref_data/lrgasp_grch38_sirvs.fasta.gz
-SIRV_ANNO=$HOME/mount2/ref_data/lrgasp_gencode_v38_sirvs.gtf.gz
-TARGET=$1
+SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
+SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
+
+NAME=$1
 #samtools index $TARGET > $HOME/mount2/minidata_index/"${TARGET##*/}".bam
-isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb --bam $TARGET --data_type nanopore -o $HOME/mount2/isoqdata 
+time isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb --bam /mnt/d/SGNEX/mini_bam/${NAME}.bam  --data_type nanopore -o /mnt/d/SGNEX/isoq/${NAME}
+
+
 
