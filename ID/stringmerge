@@ -6,5 +6,5 @@ GTF_LIST=/mnt/d/SGNEX/string/gtf_list.txt
 
   
 
-    time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/string/merged_transcripts.gtf $(cat $GTF_LIST)
+    time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_LIST)
 
