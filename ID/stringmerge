@@ -6,10 +6,10 @@ GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
 
 
-  while IFS= read -r GTF_FILE; do
-    GTF_ALL+=$GTF_FILE
+  while IFS= read -r NAME; do
+    GTF_ALL+=/mnt/d/SGNEX/fq/${NAME}.fastq
     echo $GTF_ALL
-done < gtf_list.txt
+done < $GTF_LIST
 
    # time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_LIST)
 
