@@ -6,7 +6,7 @@ GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
 
 for NAME in "$@"; do
-GTF_ALL+=" /mnt/d/SGNEX/fq/${NAME}.fastq"
+GTF_ALL+=" /mnt/d/SGNEX/String/${NAME}.gtf"
     echo $GTF_ALL
 done
 
