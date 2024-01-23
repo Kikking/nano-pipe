@@ -1,0 +1,10 @@
+#!/bin/bash 
+
+SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
+SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
+GTF_LIST=/mnt/d/SGNEX/string/gtf_list.txt
+
+  
+
+    time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/string/merged_transcripts.gtf $(cat GTF_LIST)
+

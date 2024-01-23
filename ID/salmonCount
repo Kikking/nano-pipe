@@ -1,0 +1,19 @@
+#!/bin/bash 
+
+SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
+SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
+STRING_GTF=/mnt/d/SGNEX/string/merged_transcripts.gtf
+
+NAME= $1
+
+~/gffread/gffread -w transcripts.fa -g $SIRV_REF $STRING_GTF
+
+salmon index -t transcripts.fa -i /mnt/d/SGNEX/sally/sal_string_index
+
+INDEX=/mnt/d/SGNEX/sally/sal_string_index
+
+for NAME in "$@"; do
+echo "::SALMONING::> '$NAME'"
+time salmon quant -i $INDEX -l A -r /mnt/d/SGNEX/fq/${NAME}.fastq  -o /mnt/d/SGNEX/sal_count/${NAME}_salmon_output
+done
+
