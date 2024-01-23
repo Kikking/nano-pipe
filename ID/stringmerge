@@ -4,7 +4,12 @@ SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
-  
 
-    time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_LIST)
+
+  while IFS= read -r GTF_FILE; do
+    GTF_ALL+=$GTF_FILE
+    echo $GTF_ALL
+done < gtf_list.txt
+
+   # time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_LIST)
 
