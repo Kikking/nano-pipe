@@ -5,11 +5,11 @@ SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
 
-
-  while IFS= read -r NAME; do
-    GTF_ALL+=/mnt/d/SGNEX/fq/${NAME}.fastq
+for NAME in "$@"; do
+GTF_ALL+=/mnt/d/SGNEX/fq/${NAME}.fastq
     echo $GTF_ALL
-done < $GTF_LIST
+done
+
 
    # time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_LIST)
 
