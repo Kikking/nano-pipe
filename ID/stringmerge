@@ -11,5 +11,5 @@ GTF_ALL+=" /mnt/d/SGNEX/fq/${NAME}.fastq"
 done
 
 
-   time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $(cat $GTF_ALL)
+   time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $GTF_ALL
 
