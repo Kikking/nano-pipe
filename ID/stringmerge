@@ -2,7 +2,7 @@
 
 SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
-GTF_LIST=/mnt/d/SGNEX/string/gtf_list.txt
+GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
   
 
