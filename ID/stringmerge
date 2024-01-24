@@ -4,12 +4,22 @@ SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
 
+echo "###################################################"
+echo "MAKE SURE IN CODNA SALTY ENV"
+echo "###################################################"
 
 for NAME in "$@"; do
 GTF_ALL+=" /mnt/d/SGNEX/String/${NAME}.gtf"
     echo $GTF_ALL
 done
 
+echo "#MERGING"
+time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $GTF_ALL
 
-   time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $GTF_ALL
+#must be done in salty conda env
+echo "#GEOFF"
+~/gffread/gffread -w /mnt/d/SGNEX/String/transcripts.fa -g $SIRV_REF $STRING_GTF
+
+echo "#INDEXING"
+salmon index -t /mnt/d/SGNEX/String/transcripts.fa -i /mnt/d/SGNEX/sally/sal_string_index
 
