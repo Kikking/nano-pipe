@@ -1,0 +1,29 @@
+#!/bash/bin
+
+SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
+SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
+STRING_GTF=/mnt/d/SGNEX/string/merged_transcripts.gtf
+INDEX=/mnt/d/SGNEX/sally/sal_string_index
+
+NAME=$1
+#for NAME in "$@"; do
+#GTF_ALL+=" /mnt/d/SGNEX/String/${NAME}.gtf"
+    #echo $GTF_ALL
+#done
+
+#echo "#MERGING"
+#time stringtie --merge -G $SIRV_ANNO -o /mnt/d/SGNEX/String/merged_transcripts.gtf $GTF_ALL
+
+#must be done in salty conda env
+echo "#GEOFF"
+~/gffread/gffread -w /mnt/d/SGNEX/String/${NAME}_transcripts.fa -g $SIRV_REF /mnt/d/SGNEX/String/${NAME}.gtf
+
+echo "#INDEXING"
+salmon index -t /mnt/d/SGNEX/String/${NAME}_transcripts.fa  -i /mnt/d/SGNEX/sally/sal_${NAME}_index
+
+
+
+
+echo "::SALMONING::> '$NAME'"
+ salmon quant -t /mnt/d/SGNEX/String/${NAME}_transcripts.fa -l U -a /mnt/d/SGNEX/mini_bam/${NAME}.bam -o /mnt/d/SGNEX/sal_count/bam_${NAME}_salmon_output
+time salmon quant -i /mnt/d/SGNEX/sally/sal_${NAME}_index -l A -r /mnt/d/SGNEX/fq/${NAME}.fastq  -o /mnt/d/SGNEX/sal_count/${NAME}_salmon_output_2
