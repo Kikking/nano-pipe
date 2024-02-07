@@ -3,13 +3,13 @@
 SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 TARGET=$1
-TOOL="$2" # b = bambu, s = stringtie , i = isoquant
+TOOL=$2 # b = bambu, s = stringtie , i = isoquant
 
-if  ["$TOOL" == "i"]; then
+if  [["$TOOL" == "i"]]; then
     INDIR=isoquant 
-elif ["$TOOL" == "b"]; then
+elif [["$TOOL" == "b"]]; then
     INDIR=bambu
-elif ["$TOOL" == "s"]; then
+elif [["$TOOL" == "s"]]; then
     INDIR=stringtie
 elif [[ -z "$TOOL" ]]; then
     echo "Error: Please specify a tool using the 'tool' variable."
