@@ -3,18 +3,19 @@
 SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 TARGET=$1
-TOOL=${2:"b"} # b = bambu, s = stringtie , i = isoquant
+TOOL=${2:s} # b = bambu, s = stringtie , i = isoquant
 
-if [[ -z "$TOOL" ]]; then
-    echo "Error: Please specify a tool using the 'tool' variable."
-    exit 1 
+if  ["$TOOL" == "i"]; then
+    INDIR=isoquant 
 elif ["$TOOL" == "b"]; then
     INDIR=bambu
 elif ["$TOOL" == "s"]; then
     INDIR=stringtie
-elif ["$TOOL" == "i"]; then
-    INDIR=isoquant
+elif [[ -z "$TOOL" ]]; then
+    echo "Error: Please specify a tool using the 'tool' variable."
+    exit 1
 fi
+ 
 
 
 python sqanti3_qc.py \
