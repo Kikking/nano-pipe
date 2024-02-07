@@ -8,11 +8,11 @@ TOOL=$2 # b = bambu, s = stringtie , i = isoquant
 if [[ -z "$TOOL" ]]; then
     echo "Error: Please specify a tool using the 'tool' variable."
     exit 1 
-elif [$TOOL == b]; then
+elif ["$TOOL" == "b"]; then
     INDIR=bambu
-elif [$TOOL == s]; then
+elif ["$TOOL" == "s"]; then
     INDIR=stringtie
-elif [$TOOL == i]; then
+elif ["$TOOL" == "i"]; then
     INDIR=isoquant
 fi
 
