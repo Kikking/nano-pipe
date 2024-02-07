@@ -18,9 +18,9 @@ fi
 
 
 python sqanti3_qc.py \
-/mnt/d/SGNEX/GTF_files/$INDIR/$TARGET $SIRV_ANNO $SIRV_REF \
+/mnt/d/SGNEX/GTF_files/"$INDIR"/"$TARGET".gtf $SIRV_ANNO $SIRV_REF \
 -o  $TARGET \
--d /mnt/d/SGNEX/sqantout/$INDIR \
+-d /mnt/d/SGNEX/sqantout/"$INDIR" \
 --cpus 10 --report pdf                    
 
 """
