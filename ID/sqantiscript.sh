@@ -4,6 +4,7 @@ SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 TARGET="$1"
 TOOL="$2" # b = bambu, s = stringtie , i = isoquant
+
 if [[ "$TOOL" =~ ^[ibs]$ ]]; then
   case "$TOOL" in
     b) INDIR=bambu ;;
@@ -16,12 +17,12 @@ else
 fi
  
 
-
+#Run Sqanti script
 python sqanti3_qc.py \
 /mnt/d/SGNEX/GTF_files/"$INDIR"/"$TARGET".gtf $SIRV_ANNO $SIRV_REF \
 -o  $TARGET \
--d /mnt/d/SGNEX/sqantout/"$INDIR" \
---cpus 10 --report pdf                    
+-d /mnt/d/SGNEX/sqantout/"$INDIR"/"$TARGET" \
+--cpus 10 --report pdf                   
 
 """
 
