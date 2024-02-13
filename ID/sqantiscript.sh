@@ -20,23 +20,15 @@ fi
 #Run Sqanti script
 python sqanti3_qc.py \
 /mnt/d/SGNEX/GTF_files/"$INDIR"/"$TARGET".gtf $SIRV_ANNO $SIRV_REF \
--o  $TARGET \
 -d /mnt/d/SGNEX/sqantout/"$INDIR"/"$TARGET" \
---cpus 10 --report pdf                   
-
-"""
-
-sqanti3_qc.py \
--o ST_SQ_A_r2r1 \
--d mount/sqant_output \ sqanti3_qc.py /mnt/d/SGNEX/String/A_d_r1r3 /mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf /mnt/d/refData/lrgasp_grch38_sirvs.fasta 
---cpus 8 --report pdf
-
-sqanti3_qc.py /mnt/d/SGNEX/M2/bamGTF/A_d_r1r3extended_annotations.gtf /mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf /mnt/d/refData/lrgasp_grch38_sirvs.fasta
+--polyA_motif_list ~/SQANTI3/data/polyA_motifs/mouse_and_human.polyA_motif.txt \
+--CAGE_peak ~/SQANTI3/data/ref_TSS_annotation/human.refTSS_v3.1.hg38.bed \
+--skipORF \
+--cpus 10 \
+--report pdf                   
 
 
 
-Run this in UBUNTU 18
-Activate Conda env SQANTI3.env
-#ADD this to /.bashrc:
-export PYTHONPATH=$PYTHONPATH:~/SQANTI3-5.2/cDNA_Cupcake/sequence/
-"""
+
+#conda activate SQANTI3.env
+
