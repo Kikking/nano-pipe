@@ -7,7 +7,9 @@ NAME=$1
 echo "indexing..."
 time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam 
 echo "quanting..."
-time isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb --high_memory --bam  /mnt/d/SGNEX/mini_bam/${NAME}.bam --data_type nanopore -o /mnt/d/SGNEX/isoq/${NAME}
+time isoquant.py --reference $SIRV_REF  --genedb $SIRV_ANNO --complete_genedb -t 8 --high_memory --bam  /mnt/d/SGNEX/mini_bam/${NAME}.bam --data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/${NAME}
+echo "renaming..." 
+time mv /mnt/d/SGNEX/GTF_files/isoquant/${TARGET}/OUT/OUT.extended_annotations.gtf /mnt/d/SGNEX/GTF_files/isoquant/${TARGET}/OUT/${TARGET}.gtf 
 
 
 
