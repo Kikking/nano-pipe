@@ -9,14 +9,14 @@ if [[ "$TOOL" =~ ^[ibs]$ ]]; then
   case "$TOOL" in
     b) INDIR=bambu ;;
     s) INDIR=stringtie ;;
-    i) INDIR=isoquant ;;
+    i) INDIR=isoquant/${TARGET}/OUT ;;
   esac
 else
   echo "Error: Invalid tool value '$TOOL'. Please use 'b', 's', or 'i'."
   exit 1
 fi
- 
 
+ 
 #Run Sqanti script
 python sqanti3_qc.py \
 /mnt/d/SGNEX/GTF_files/"$INDIR"/"$TARGET".gtf $SIRV_ANNO $SIRV_REF \
