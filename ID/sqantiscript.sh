@@ -9,7 +9,7 @@ if [[ "$TOOL" =~ ^[ibs]$ ]]; then
   case "$TOOL" in
     b) INDIR=bambu ;;
     s) INDIR=stringtie ;;
-    i) INDIR=isoquant/${TARGET}/OUT ;;
+    i) INDIR=isoquant/${TARGET};;
   esac
 else
   echo "Error: Invalid tool value '$TOOL'. Please use 'b', 's', or 'i'."
