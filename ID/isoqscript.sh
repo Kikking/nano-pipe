@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SIRV_REF=/mnt/d/refData//mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
+SIRV_REF=/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
 SIRV_ANNO=/mnt/d/refData/MixA_hg38_Annotation.db
 #/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 #/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs_v5_reformatted.gtf
