@@ -45,9 +45,9 @@ fi
 
 #clean up processing directories
 
-echo "%%%%%%%%%%%%%%%CLEANING f5/"${NAME}"%%%%%%%%%%%%%%%%%%"
-find /mnt/e/SGNEX/f5/${NAME} -type f  -exec rm {} \;
-echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
-find /mnt/e/SGNEX/multif5/${NAME} -type f  -exec rm {} \;
+#echo "%%%%%%%%%%%%%%%CLEANING f5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+#find /mnt/e/SGNEX/f5/${NAME} -type f  -exec rm {} \;
+#echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+#find /mnt/e/SGNEX/multif5/${NAME} -type f  -exec rm {} \;
 
  
