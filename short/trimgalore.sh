@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+trim_galore -o ~/barbet/trim/ --paired SGNex_A549_Illumina_replicate1_run1_R1.fastq.gz SGNex_A549_Illumina_replicate1_run1_R2.fastq.gz SGNex_Hct116_Illumina_replicate3_run1_R1.fastq.gz SGNex_Hct116_Illumina_replicate3_run1_R2.fastq.gz SGNex_A549_Illumina_replicate3_run1_R1.fastq.gz SGNex_A549_Illumina_replicate3_run1_R2.fastq.gz SGNex_Hct116_Illumina_replicate4_run1_R1.fastq.gz SGNex_Hct116_Illumina_replicate4_run1_R2.fastq.gz SGNex_A549_Illumina_replicate5_run1_R1.fastq.gz SGNex_A549_Illumina_replicate5_run1_R2.fastq.gz SGNex_Hct116_Illumina_replicate5_run1_R1.fastq.gz SGNex_Hct116_Illumina_replicate5_run1_R2.fastq.gz

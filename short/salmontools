@@ -1,0 +1,10 @@
+
+
+
+bash ~/SalmonTools/scripts/generateDecoyTranscriptome.sh \
+-m ~/MashMap-3.1.3/build/bin/mashmap \
+-b ~/bedtools2/bin/bedtools \
+-a /mnt/d/SGNEX/String/merged_transcripts.gtf \
+-g lrgasp_grch38_sirvs.fasta \
+-t transcripts.fa \
+-o ont_stringtie_new

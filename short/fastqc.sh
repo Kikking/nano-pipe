@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ fastqc -o ~/barbet/trimfqc -t 3 --noextract -f fastq SGNex_A549_Illumina_replicate1_run1_R1_val_1.fq.gz SGNex_Hct116_Illumina_replicate3_run1_R1_val_1.fq.gz SGNex_A549_Illumina_replicate1_run1_R2_val_2.fq.gz SGNex_Hct116_Illumina_replicate3_run1_R2_val_2.fq.gz SGNex_A549_Illumina_replicate3_run1_R1_val_1.fq.gz  SGNex_Hct116_Illumina_replicate4_run1_R1_val_1.fq.gz SGNex_A549_Illumina_replicate3_run1_R2_val_2.fq.gz SGNex_Hct116_Illumina_replicate4_run1_R2_val_2.fq.gz SGNex_A549_Illumina_replicate5_run1_R1_val_1.fq.gz SGNex_Hct116_Illumina_replicate5_run1_R1_val_1.fq.gz SGNex_A549_Illumina_replicate5_run1_R2_val_2.fq.gz SGNex_Hct116_Illumina_replicate5_run1_R2_val_2.fq.gz
