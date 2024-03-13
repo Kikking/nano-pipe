@@ -3,7 +3,7 @@
 #SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
 #SIRV_ANNO=/mnt/e/refData/filtered_fin.db
 SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.db
-SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs_v5_reformatted.gtf
+SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
 
 NAME=$1
 echo "indexing..."
