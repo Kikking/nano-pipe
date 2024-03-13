@@ -4,8 +4,8 @@ REF_GENOME=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 REF_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 REF_TRANSCRIPTOME=/mnt/d/refData/gencode.v44.transcripts.fa.gz
 MODEL=/mnt/e/nanosim_training/human_NA12878_cDNA_Bham1_guppy
-
-simulator.py transcriptome -rt $REF_TRANSCRIPTOME-rg $REF_GENOME -c $MODEL -b guppy -r cDNA_1D --fastq -t 8
+EXPRESSION=/mnt/e/nanosim_training/human_NA12878_cDNA_Bham1_guppy/expression_abundance.tsv
+simulator.py transcriptome -rt $REF_TRANSCRIPTOME -rg $REF_GENOME -e $EXPRESSION -c $MODEL -b guppy -r cDNA_1D --fastq -t 8
 
 """
 optional arguments:
