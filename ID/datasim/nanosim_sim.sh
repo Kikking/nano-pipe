@@ -3,7 +3,7 @@
 REF_GENOME=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 REF_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 REF_TRANSCRIPTOME=/mnt/d/refData/gencode.v44.transcripts.fa.gz
-MODEL=/mnt/e/nanosim_training/training
+MODEL=/mnt/e/nanosim_training/training/
 EXPRESSION=/mnt/e/nanosim_training/training/expression_abundance.tsv
 simulator.py transcriptome -rt $REF_TRANSCRIPTOME -rg $REF_GENOME -e $EXPRESSION -c $MODEL -b guppy -r cDNA_1D --fastq -t 8
 
