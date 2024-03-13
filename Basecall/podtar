@@ -31,7 +31,7 @@ if [[ -n $(find /mnt/e/SGNEX/f5/$NAME -type f -name "*read*" -a -name "*ch*") ]]
 
     echo "::::::::::::::CONVERTING:::::::::::::"
     sleep 10
-    pod5 convert fast5 /mnt/e/SGNEX/multif5/${NAME} --output /mnt/e/SGNEX/p5/${NAME%.*}.pod5 --force-overwrite
+    pod5 convert fast5 /mnt/e/SGNEX/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME%.*}.pod5 --force-overwrite
     
 else 
     echo "$NAME is a MULTI file"
@@ -40,14 +40,14 @@ else
     find /mnt/e/SGNEX/f5/${NAME} -type f -exec mv -t /mnt/e/SGNEX/multif5/${NAME} {} +
     echo "::::::::::::::CONVERTING:::::::::::::"
     sleep 10
-    pod5 convert fast5 /mnt/e/SGNEX/multif5/${NAME} --output /mnt/e/SGNEX/p5/${NAME}.pod5 --force-overwrite
+    pod5 convert fast5 /mnt/e/SGNEX/multif5/${NAME} --output /mnt/d/SGNEX/p5/${NAME}.pod5 --force-overwrite
 fi
 
 #clean up processing directories
 
-#echo "%%%%%%%%%%%%%%%CLEANING f5/"${NAME}"%%%%%%%%%%%%%%%%%%"
-#find /mnt/e/SGNEX/f5/${NAME} -type f  -exec rm {} \;
-#echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
-#find /mnt/e/SGNEX/multif5/${NAME} -type f  -exec rm {} \;
+echo "%%%%%%%%%%%%%%%CLEANING f5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+find /mnt/e/SGNEX/f5/${NAME} -type f  -exec rm {} \;
+echo "%%%%%%%%%%%%%%%CLEANING multif5/"${NAME}"%%%%%%%%%%%%%%%%%%"
+find /mnt/e/SGNEX/multif5/${NAME} -type f  -exec rm {} \;
 
  
