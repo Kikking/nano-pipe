@@ -6,3 +6,5 @@ echo $i
 bash run_caller.sh model.chkpt $i 2048 /content/mount/SA_fastar2;
 
 done
+
+#create an infinite loop to crash the pc        

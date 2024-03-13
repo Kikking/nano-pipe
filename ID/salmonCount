@@ -12,14 +12,14 @@ echo "###################################################"
 
 for NAME in "$@"; do
 echo "::SALMONING::> '$NAME'"
- salmon quant \
+ #salmon quant \
  #-t /mnt/d/SGNEX/String/transcripts.fa \
- -t $SIRV_REF  \
- -l U \
- -a /mnt/d/SGNEX/mini_bam/${NAME}.bam \
- --validateMappings \
- --threads 16 \
- -o /mnt/d/SGNEX/sal_count/bam_${NAME}_salmon_output
+ #-t $SIRV_REF  \
+ #-l U \
+ #-a /mnt/d/SGNEX/mini_bam/${NAME}.bam \
+# --validateMappings \
+ #--threads 16 \
+# -o /mnt/d/SGNEX/sal_count/bam_${NAME}_salmon_output
 # time salmon quant -i $INDEX -l A -r /mnt/d/SGNEX/fq/${NAME}.fastq  -o /mnt/d/SGNEX/sal_count/${NAME}_salmon_output
-done
+#done
 

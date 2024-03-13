@@ -3,6 +3,7 @@
 SIRV_REF=/mnt/d/refData/lrgasp_grch38_sirvs.fasta
 SIRV_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 GTF_LIST=/mnt/d/SGNEX/String/gtf_list.txt
+STRING_GTF=/mnt/d/SGNEX/String/merged_transcripts.gtf
 
 echo "###################################################"
 echo "MAKE SURE IN CODNA SALTY ENV"
@@ -23,3 +24,4 @@ echo "#GEOFF"
 echo "#INDEXING"
 salmon index -t /mnt/d/SGNEX/String/transcripts.fa -i /mnt/d/SGNEX/sally/sal_string_index
 
+~/gffread/gffread -w /mnt/d/SGNEX/String/transcripts.fa -g /mnt/d/refData/lrgasp_grch38_sirvs.fasta /mnt/d/SGNEX/String/merged_transcripts.gtf

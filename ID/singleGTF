@@ -16,14 +16,17 @@ NAME=$1
 
 #must be done in salty conda env
 echo "#GEOFF"
-~/gffread/gffread -w /mnt/d/SGNEX/String/${NAME}_transcripts.fa -g $SIRV_REF /mnt/d/SGNEX/String/${NAME}.gtf
+~/gffread/gffread -w /mnt/d/SGNEX/String/A_d_r1r3_transcripts.fa -g /mnt/d/refData/lrgasp_grch38_sirvs.fasta /mnt/d/SGNEX/GTF_files/stringtie/A_d_r1r3_transcripts.gtf
 
 echo "#INDEXING"
+
 salmon index -t /mnt/d/SGNEX/String/${NAME}_transcripts.fa  -i /mnt/d/SGNEX/sally/sal_${NAME}_index
-
-
+almon index -t /mnt/d/SGNEX/String/${NAME}_transcripts.fa  -i /mnt/d/SGNEX/sally/sal_${NAME}_index
 
 
 echo "::SALMONING::> '$NAME'"
  salmon quant -t /mnt/d/SGNEX/String/${NAME}_transcripts.fa -l U -a /mnt/d/SGNEX/mini_bam/${NAME}.bam -o /mnt/d/SGNEX/sal_count/bam_${NAME}_salmon_output
-time salmon quant -i /mnt/d/SGNEX/sally/sal_${NAME}_index -l A -r /mnt/d/SGNEX/fq/${NAME}.fastq  -o /mnt/d/SGNEX/sal_count/${NAME}_salmon_output_2
+time salmon quant -i ~/darter/refData/salindex -l U -r /mnt/d/SGNEX/String/A_d_r1r3_transcripts.fa -o /mnt/d/SGNEX/sal_count/${NAME}_salmon_output_1502
+
+
+time salmon quant -i /mnt/d/SGNEX/sally/sal_string_index -l U -r /mnt/d/SGNEX/fq/A_d_r1r3.fastq -o /mnt/d/SGNEX/sal_count/${NAME}_fq_count
