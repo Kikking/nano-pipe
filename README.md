@@ -29,8 +29,7 @@ Problem: /mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa has duplicate trans
 
 4. Remove [] and '' from feature IDs:
 
-       cat output_test1.gtf | awk ' {gsub(/[\047\[\]]/,"",$10);gsub(/[\047\[\]]/,"",$12);gsub(/[\047\[\]]/,"",$14)}' > SIRV_edited.gtf
-
+       awk 'BEGIN{OFS="\t"} {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); print $0}' output_test1.gtf > SIRV_edited.gtf
 
 To create unique exon IDs (didnt use, but might need):
     
