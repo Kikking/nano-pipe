@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SIRV_REF=/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
-SIRV_ANNO=/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs_v5_reformatted.gtf
+SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
+SIRV_ANNO=/mnt/e/refData/SIRV_edited.gtf
 TARGET="$1"
 TOOL="$2" # b = bambu, s = stringtie , i = isoquant
 
