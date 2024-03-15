@@ -1,9 +1,9 @@
 #!/bin/bash
 
-SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.gtf
-SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
-#SIRV_REF=/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
-#SIRV_ANNO=/mnt/d/refData/hg38_sequins_SIRV_ERCCs_longSIRVs_v5_reformatted.gtf
+#SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.gtf
+#SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
+SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
+SIRV_ANNO=/mnt/e/refData/output_test1.gtf
 
 for NAME in "$@"; do
 echo "::STRINGING::> '$NAME'"
