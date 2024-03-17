@@ -7,9 +7,9 @@ TOOL="$2" # b = bambu, s = stringtie , i = isoquant
 
 if [[ "$TOOL" =~ ^[ibs]$ ]]; then
   case "$TOOL" in
-    b) INDIR=bambu ;;
-    s) INDIR=stringtie ;;
-    i) INDIR=isoquant/${TARGET};;
+    b) INDIR=bambu/${TARGET}/extended_annotations.gtf ;;
+    s) INDIR=stringtie/${TARGET}/${TARGET}.gtf ;;
+    i) INDIR=isoquant/${TARGET}/${TARGET}.gtf ;;
   esac
 else
   echo "Error: Invalid tool value '$TOOL'. Please use 'b', 's', or 'i'."
@@ -19,7 +19,7 @@ fi
  
 #Run Sqanti script
 python sqanti3_qc.py \
-/mnt/d/SGNEX/GTF_files/"$INDIR"/"$TARGET".gtf $SIRV_ANNO $SIRV_REF \
+/mnt/d/SGNEX/GTF_files/"$INDIR" $SIRV_ANNO $SIRV_REF \
 -d /mnt/d/SGNEX/sqantout/"$INDIR"/"$TARGET" \
 --polyA_motif_list ~/SQANTI3/data/polyA_motifs/mouse_and_human.polyA_motif.txt \
 --CAGE_peak ~/SQANTI3/data/ref_TSS_annotation/human.refTSS_v3.1.hg38.bed \
