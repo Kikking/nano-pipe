@@ -5,7 +5,7 @@ LENGTH=${2:-9000}
 LENGTHSD=${3:-7000}
 ACCURACY=${4:-0.85}
 
-awk 'BEGIN {OFS="\t"} {$2=$2"$COUNT";$3=$3"$COUNT"}1' sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_$COUNT
+awk 'BEGIN {OFS="\t"} {$2=$2"$COUNT";$3=$3"$COUNT"}1' ~/pbsim3-3.0.4/sample/sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_$COUNT
 
  pbsim --strategy trans --method errhmm \
  --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
