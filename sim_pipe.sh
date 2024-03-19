@@ -47,17 +47,18 @@ sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH 
 
     echo "Count: $COUNT"
     NAME="sd_${COUNT}_9000-2000_0.85"
-    ALL_ID
     MAPPING
+    ALL_ID
 
     echo "Length: $LENGTH"
     NAME="sd_10_${LENGTH}-2000_0.85"
-    ALL_ID
     MAPPING
+    ALL_ID
 
     echo "Accuracy: $ACCURACY"
     NAME="sd_10_9000-2000_${ACCURACY}"
-    ALL_ID
     MAPPING
+    ALL_ID
+   
 
 done
