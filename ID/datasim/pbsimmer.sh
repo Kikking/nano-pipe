@@ -1,9 +1,18 @@
 #!/bin/bash 
 
-COUNT=${1:-}
-LENGTH=${2:-9000}
-LENGTHSD=${3:-7000}
-ACCURACY=${4:-0.85}
+COUNT="1"
+LENGTH="9000"
+LENGTHSD="2000"
+ACCURACY="0.85"
+
+while getopts L:A:C: flag
+do
+    case "${flag}" in
+        L) LENGTH=${OPTARG};;
+        A) ACCURACY=${OPTARG};;
+        C) COUNT=${OPTARG};;
+    esac
+done
 
 awk 'BEGIN {OFS="\t"} {$2=$2*$COUNT;$3=$3*$COUNT}1' ~/pbsim3-3.0.4/sample/sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_$COUNT
 

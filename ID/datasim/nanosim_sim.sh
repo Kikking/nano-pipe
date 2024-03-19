@@ -5,7 +5,7 @@ REF_ANNO=/mnt/d/refData/lrgasp_gencode_v38_sirvs.gtf
 REF_TRANSCRIPTOME=/mnt/d/refData/gencode.v44.transcripts.fa
 MODEL=/mnt/e/nanosim_training/training/training
 EXPRESSION=/mnt/e/nanosim_training/training/expression_abundance.tsv
-simulator.py transcriptome -rt $REF_TRANSCRIPTOME -rg $REF_GENOME -e $EXPRESSION -c $MODEL -b guppy -r cDNA_1D --fastq -t 8
+simulator.py transcriptome -rt $REF_TRANSCRIPTOME -rg $REF_GENOME -e $EXPRESSION -c $MODEL -b guppy -r cDNA_1D --fastq -t 8 -n 3000000000
 
 """
 optional arguments:
