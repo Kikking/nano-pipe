@@ -19,7 +19,7 @@ awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3
  pbsim --strategy trans --method errhmm \
  --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
  --transcript ~/pbsim3-3.0.4/sample/sample.transcript_$COUNT \
- --prefix /mnt/d/SGNEX/fq/sd_$COUNT_$LENGTH-$LENGTHSD_$ACCURACY \
-   --length-mean $LENGTH \
-  --length-sd  $LENGTHSD \
-  --accuracy-mean $ACCURACY 
+ --prefix "/mnt/d/SGNEX/fq/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}"  \
+ --length-mean $LENGTH \
+ --length-sd $LENGTHSD \
+ --accuracy-mean $ACCURACY 
