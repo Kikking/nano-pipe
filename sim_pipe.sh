@@ -46,21 +46,21 @@ sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH 
     # Process each field (value)
 
     echo "Count: $COUNT"
-    bash ~/nano-pipe/ID/sim_data/pbsimmer.sh -C ${COUNT}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -C ${COUNT}
     echo "------"
     NAME=sd_${COUNT}_9000-2000_0.85
     ${MAPPING}
     ${ALL_ID}
 
     echo "Length: $LENGTH"
-    bash ~/nano-pipe/ID/sim_data/pbsimmer.sh -L ${LENGTH}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -L ${LENGTH}
     echo "------"
     NAME=sd_10_${LENGTH}-2000_0.85
     ${MAPPING}
     ${ALL_ID}
 
     echo "Accuracy: $ACCURACY"
-    bash ~/nano-pipe/ID/sim_data/pbsimmer.sh -A ${ACCURACY}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY}
     echo "------"
     NAME=sd_10_9000-2000_${ACCURACY}
     ${MAPPING}
