@@ -33,5 +33,5 @@ annotations <- readRDS("/mnt/e/refData/SIRV_edited_annotations.rds")
 #################
 se <- bambu(reads = paste0("/mnt/d/SGNEX/mini_bam/",filepath,".bam"), annotations = annotations, genome = fa.file, lowMemory  = FALSE, quant = T)
 #writeToGTF(se, paste0("D:/SGNEX/GTF_files/bambu", sub(".bam", "", sub("D:/SGNEX/mini_bam", "", filepath)),".gtf"))
-writeBambuOutput(se, paste0("/mnt/d/SGNEX/GTF_files/Bambu/",sub(".bam", "", sub("/mnt/d/SGNEX/mini_bam", "", filepath))))
+writeBambuOutput(se, paste0("/mnt/d/SGNEX/GTF_files/bambu/",filepath))
 
