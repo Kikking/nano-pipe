@@ -10,7 +10,9 @@ ALL_ID() {
 
     # Check if the file exists
     if [ -f "$filepath" ]; then
+    tput setaf 2 
         echo "File ${NAME}.bam exists. Proceeding..."
+    tput sgr0
         # STRINGTIE
         time bash ~/nano-pipe/ID/string.sh "$NAME"
         bash ~/nano-pipe/template.sh "$NAME" STRINGTIE
@@ -21,23 +23,29 @@ ALL_ID() {
         time Rscript ~/nano-pipe/ID/bambush.R "$NAME"
         bash ~/nano-pipe/template.sh "$NAME" BAMBU
     else
+    tput setaf 1
         echo "File $filepath does not exist. Writing to log file $ID_LOG..."
         echo "File $filepath does not exist." >> "$ID_LOG"
+    tput sgr0
     fi
 }
 
 # Function to perform Mapping tasks
 MAPPING() {
     # Define the file path
-    filepath="/mnt/d/SGNEX/fq/${NAME}.fq"
+    filepath="/mnt/d/SGNEX/fq/${NAME}.fastq"
 
     # Check if the file exists
     if [ -f "$filepath" ]; then
-        echo "File ${NAME}.fq exists. Proceeding..."
+        tput setaf 2 
+        echo "File ${NAME}.fastq exists. Proceeding..."
+        tput sgr0
         time bash ~/nano-pipe/Mapping/minisam.sh "$NAME"
     else
+    tput setaf 1
         echo "File $filepath does not exist. Writing to log file $MAPPING_LOG..."
         echo "File $filepath does not exist." >> "$MAPPING_LOG"
+    tput sgr0
     fi
 }
 
