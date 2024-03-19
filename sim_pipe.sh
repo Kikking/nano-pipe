@@ -68,6 +68,7 @@ MAPPING() {
             tput sgr0
         else
             time bash ~/nano-pipe/Mapping/minisam.sh "$NAME"
+        fi
     else
     tput setaf 1
         echo "File $filepath does not exist. Writing to log file $MAP_LOG..."
