@@ -3,21 +3,6 @@
 args <- commandArgs(trailingOnly = TRUE)
 filepath <- args[1]
 
-
-if (!"devtools" %in% installed.packages()) {
-  install.packages("devtools")
-}
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  library(devtools)
-}
-
-# Load bambu package if not already loaded
-if (!"bambu" %in% installed.packages()) {
-  devtools::install_github("GoekeLab/bambu")
-}
-if (!requireNamespace("bambu", quietly = TRUE)) {
-  library(bambu)
-}
 library(bambu)
 
 
