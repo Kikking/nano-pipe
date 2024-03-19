@@ -80,24 +80,29 @@ MAPPING() {
 # Read the CSV file line by line
 sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURACY; do
     # Process each field (value)
-
+    tput setaf 5
     echo "Count: $COUNT"
+    tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -C ${COUNT}
     echo "------"
     NAME=sd_${COUNT}_9000-2000_0.85
     sleep 5
     MAPPING
     ALL_ID
-
+    
+    tput setaf 5
     echo "Length: $LENGTH"
+    tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -L ${LENGTH}
     echo "------"
     NAME=sd_1_${LENGTH}-2000_0.85
     sleep 5
     MAPPING
     ALL_ID
-
+    
+    tput setaf 5
     echo "Accuracy: $ACCURACY"
+    tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY}
     echo "------"
     NAME=sd_1_9000-2000_${ACCURACY}
