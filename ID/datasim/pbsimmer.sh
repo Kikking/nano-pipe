@@ -1,9 +1,9 @@
 #!/bin/bash 
 
-COUNT="1"
-LENGTH="9000"
-LENGTHSD="2000"
-ACCURACY="0.85"
+COUNT=1
+LENGTH=9000
+LENGTHSD=2000
+ACCURACY=0.85
 
 while getopts L:A:C: flag
 do
@@ -14,7 +14,7 @@ do
     esac
 done
 
-awk 'BEGIN {OFS="\t"} {$2=$2*$COUNT;$3=$3*$COUNT}1' ~/pbsim3-3.0.4/sample/sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_$COUNT
+awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3-3.0.4/sample/sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_"$COUNT"
 
  pbsim --strategy trans --method errhmm \
  --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
