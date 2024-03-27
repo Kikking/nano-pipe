@@ -2,8 +2,10 @@
 
 #SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.gtf
 #SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
-SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
-SIRV_ANNO=/mnt/e/refData/SIRV_edited.gtf
+#SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
+SIRV_REF=/mnt/e/refData/Homo_sapiens.GRCh38.dna_sm.toplevel.fa.gz
+SIRV_ANNO=/mnt/e/refData/gencode.v45.annotation.gtf
+#SIRV_ANNO=/mnt/e/refData/SIRV_edited.gtf
 
 for NAME in "$@"; do
 echo "::STRINGING::> '$NAME'"
