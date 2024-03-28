@@ -1,7 +1,7 @@
 #!/bin/bash 
 CONFIG_FILE=/mnt/e/talon_config1.csv
 DB_FILE=/mnt/e/tdb2.db
-talon --f $CONFIG_FILE --db $DB_FILE --build hg38 --nsg --o talon_test 
+talon --f /mnt/e/talon_config1.csv --db /mnt/e/tdb2.db --build hg38 --nsg --o talon_test 
 
 """
 optional arguments:
