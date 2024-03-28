@@ -1,0 +1,77 @@
+
+
+Problem: /mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.gtf has duplicate transcripts:
+
+            gene 1
+              transcript 1
+                   exon 1
+                   exon 2
+                   exon 3
+              transcript 1
+                   exon 4
+                   exon 5
+                   exon 6
+
+
+1. Filter out all genes and transcript features: 
+   
+   cat test.gtf | awk '$3!="gene" && $3!="transcript"{print}' > filteredtest.gtf
+
+
+2. Using GFFutils, create a .db and rebuild transcript and gene features by setting: 
+   
+   disable_infer_genes=False, disable_infer_transcripts=False  
+
+
+3. Convert the db back into a gtf file using the function from the gFFutils script in nano-pipe
+
+
+4. Remove [] and '' from feature IDs:
+
+   awk 'BEGIN{OFS="\t"} {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); print $0}' output_test1.gtf > SIRV_edited.gtf
+
+
+To create unique exon IDs (didnt use, but might need):
+
+   awk 'BEGIN {counter = 0} $3=="exon" {gsub(/"|;/,"",$14);gsub(/"|;/,"",$12);$14="\""$12"-"$14"\";";$12="\""$12"\";"}1' test.gtf > mod.gtf
+
+
+
+awk 'BEGIN{OFS="\t"} $3==gene {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); printf "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n", $1, OFS, $2, OFS, $3, OFS, $4, OFS, $5, OFS, $6, OFS, $7, OFS, $8, OFS, $9, OFS, $10, OFS, $11, OFS, $12}' \
+$3==transcript && $3--exon {sub(/\t$/,"")} {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); printf "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n", $1, OFS, $2, OFS, $3, OFS, $4, OFS, $5, OFS, $6, OFS, $7, OFS, $8, OFS, $9, OFS, $10, OFS, $11, OFS, $12, OFS, $13, OFS, $14, OFS, $15}\
+test.gtf > out_test.gtf
+
+ awk 'BEGIN{OFS="\t"} $3==gene {sub(/\t$/,"")} {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); printf "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n", $1, OFS, $2, OFS, $3, OFS, $4, OFS, $5, OFS, $6, OFS, $7, OFS, $8, OFS, $9, OFS, $10, OFS, $11, OFS, $12, OFS, $13, OFS, $14, OFS, $15}' test.gtf > out_test.gtf
+
+
+  awk 'BEGIN{OFS="\t"} $3=="gene" {$10=gensub(/[\047\[\]]/,"","g",$10); printf "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n", $1, OFS, $2, OFS, $3, OFS, $4, OFS, $5, OFS, $6, OFS, $7, OFS, $8, OFS, $9, OFS, $10, OFS, $11, OFS, $12} $3!="gene" {$10=gensub(/[\047\[\]]/,"","g",$10); $12=gensub(/[\047\[\]]/,"","g",$12); $14=gensub(/[\047\[\]]/,"","g",$14); printf "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n", $1, OFS, $2, OFS, $3, OFS, $4, OFS, $5, OFS, $6, OFS, $7, OFS, $8, OFS, $9, OFS, $10, OFS, $11, OFS, $12, OFS, $13, OFS, $14, OFS, $15}' test.gtf > out_test.gtf
+
+  awk 'BEGIN{OFS="\t"} $3=="gene" {$10=gensub(/[\047\[\]]/,"","g",$10); print}' out_test.gtf > out_test.gtf
+
+
+
+   awk 'BEGIN{OFS="\t"} {if($3=="gene") {gsub(/[\047\[\]]/,"",$10)} else {if($3=="transcript") {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12)} else {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12); gsub(/[\047\[\]]/,"",$14); $1=$1; print}}' test.gtf > out_test.gtf
+
+
+   awk 'BEGIN{OFS="\t"} $3=="transcript" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);} $3=="exon" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);gsub(/[\047\[\]]/,"",$14);} $3=="gene" {gsub(/[\047\[\]]/,"",$10);} {print}' test.gtf > out_test.gtf
+
+
+awk 'BEGIN{OFS="\t"} {line=$1; for (i=2; i<=9; i++) {line=line OFS $i;} {gsub("transcript_id","transcript_id ",$9);gsub("gene_id","gene_id ",$9);gsub("exon_number","exon_number ",$9);}1' output_file.gtf > output_file1.gtf
+   f{if ($9 ~ /^(transcript_id|gene_id|exon_number)$/) {gsub("_","_ ",$i);} line=line " " $i;}
+
+
+
+
+
+
+
+
+ awk '$3=="transcript" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);} $3=="exon" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);gsub(/[\047\[\]]/,"",$14);} $3=="gene" {gsub(/[\047\[\]]/,"",$10);} {print}' output_test1.gtf > output_file.gtf
+
+awk 'BEGIN{OFS="\t"} {line=$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6 OFS $7 OFS $8 OFS $9; for (i=10; i<=NF; i++) {line=line (i==10 ? " " : " ") $i;} print line}' output_file.gtf > SIRV_edited.gtf
+
+
+
+ awk '$3=="transcript" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);} $3=="exon" {gsub(/[\047\[\]]/,"",$10); gsub(/[\047\[\]]/,"",$12);gsub(/[\047\[\]]/,"",$14);} $3=="gene" {gsub(/[\047\[\]]/,"",$10);} {print}' input_file.gtf > output_file.gtf
+
+awk 'BEGIN{OFS="\t"} {line=$1 OFS $2 OFS $3 OFS $4 OFS $5 OFS $6 OFS $7 OFS $8 OFS $9; for (i=10; i<=NF; i++) {line=line (i==10 ? " " : " ") $i;} print line}' output_file.gtf > SIRV_edited.gtf

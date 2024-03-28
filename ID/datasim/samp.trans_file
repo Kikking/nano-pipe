@@ -1,0 +1,17 @@
+#####################################################
+How to get random sequences for simulation:
+#####################################################
+
+
+file obtained from: https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
+
+
+Takes seq IDs and FASTA sequences and puts them into 2 seperate columns. 2 middle columns with forward (0-10) and reverse (0-4) are added in the middle to represent random expression values
+    awk 'BEGIN{srand();} /^>/ {if (seq) {print seqid "\t" int(1 + rand() * 100) "\tPlaceholder2\t" seq}; seqid = $1; seq = ""; next} {seq = seq $1} END {print seqid "\t" int(1 + rand() * 100) "\tPlaceholder2\t" seq}' Homo_sapiens.GRCh38.cdna.all.fa > testfile.txt
+
+Randomly select 1000 different transcripts from the file
+    shuf -n 1000 test_file.txt > sample_1000.transcript
+
+Remove ">" from seq IDs
+    awk '{sub(">", "", $0)}1' sample_1000.transcript > sample_1000.transcripttest
+    mv sample_1000.transcripttest sample_1000.transcript

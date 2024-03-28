@@ -1,0 +1,28 @@
+###########################################
+How the Custom Fasta and GTF was created:
+###########################################
+
+FASTA:
+Grab SIRV chromsomes
+        grep -A 1 '>SIRVomeERCCome' hg38_sequins_SIRV_ERCCs_longSIRVs.fa > /mnt/e/refData/SIRVomeERCCome
+        grep -A 1 '>chrIS' hg38_sequins_SIRV_ERCCs_longSIRVs.fa > /mnt/e/refData/chrIS
+
+    Format the chrom into same format as dest. FASTA (/n every 60 char)
+        fold -w 60 SIRVomeERCCome > SIRVomeERCCome.fa
+        fold -w 60 chrIS > chrIS.fa 
+
+    Round em up
+        cat SIRVomeERCCome.fa chrIS.fa GRCh38.p14.genome.fa > GRCh38.p14_chr1S_SIRV.fa
+
+
+GTF:
+    Grab SIRV chromsomes
+        grep 'SIRVomeERCCome' SIRV_edited.gtf > SIRVomeERCCome.gtf
+        grep 'chrIS' SIRV_edited.gtf > chrIS.gtf
+
+    Remove Header from gencode file
+        tail -n +6 gencode.v45.annotation.gtf > temp.gtf
+
+    round em up
+        cat chrIS.gtf SIRVomeERCCome.gtf temp.gtf > gencode45_chrIS_SIRV.gtf
+    

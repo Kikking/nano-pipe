@@ -1,7 +1,16 @@
 #!/bin/bash
 ID_LOG="ALL_ID.log"
 MAP_LOG="MAPPING.log"
-#!/bin/bash
+
+while getopts P:S: flag
+do
+    case "${flag}" in
+        P) PARAMETER_FILE=${OPTARG};;
+        S) SAMPLE_FILE=${OPTARG};;
+    esac
+done
+
+dos2unix ${PARAMETER_FILE}
 
 # Function to perform ID tasks
 ALL_ID() {
@@ -78,12 +87,12 @@ MAPPING() {
 }
 
 # Read the CSV file line by line
-sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURACY; do
+sed 1d ${PARAMETER_FILE} | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURACY; do
     # Process each field (value)
     tput setaf 5
     echo "Count: $COUNT"
     tput sgr0
-    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -C ${COUNT}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -C ${COUNT}
     echo "------"
     NAME=sd_${COUNT}_9000-2000_0.85
     sleep 5
@@ -93,7 +102,7 @@ sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH 
     tput setaf 5
     echo "Length: $LENGTH"
     tput sgr0
-    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -L ${LENGTH}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -L ${LENGTH}
     echo "------"
     NAME=sd_1_${LENGTH}-2000_0.85
     sleep 5
@@ -103,7 +112,7 @@ sed 1d "/mnt/e/pbsim_data/first_run.txt" | while IFS=$'\t' read -r COUNT LENGTH 
     tput setaf 5
     echo "Accuracy: $ACCURACY"
     tput sgr0
-    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY}
+    bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY} -S ${SAMPLE_FILE}
     echo "------"
     NAME=sd_1_9000-2000_${ACCURACY}
     sleep 5

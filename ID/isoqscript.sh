@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SIRV_REF=/mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa 
-SIRV_ANNO=/mnt/e/refData/filtered_fin.db
+SIRV_REF=/mnt/e/refData/current/GRch38.p14_chrIS_SIRV.fa
+SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.db
 #SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.db
 #SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
 
@@ -15,6 +15,5 @@ time mv /mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.extended_annotation.gtf 
 
 
 
-#cat test.gtf | awk '$3!="gene" && $3!="transcript"{print}' > filteredtest.gtf
 
-#awk 'BEGIN {counter = 0} $3=="exon" {gsub(/"|;/,"",$14);gsub(/"|;/,"",$12);$14="\""$12"-"$14"\";";$12="\""$12"\";"}1' test.gtf > mod.gtf
+
