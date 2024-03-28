@@ -11,11 +11,11 @@ do
         L) LENGTH=${OPTARG};;
         A) ACCURACY=${OPTARG};;
         C) COUNT=${OPTARG};;
-        S) SAMPLE_FILE= ${OPTARG};;
+        S) SAMPLE_FILE=${OPTARG};;
     esac
 done
 
-awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3-3.0.4/sample/sample.transcript > ~/pbsim3-3.0.4/sample/sample.transcript_"$COUNT"
+awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3-3.0.4/sample/${SAMPLE_FILE} > ~/pbsim3-3.0.4/sample/${SAMPLE_FILE}_"$COUNT"
 
  pbsim --strategy trans --method errhmm \
  --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
