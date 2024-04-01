@@ -39,7 +39,7 @@ ALL_ID() {
             echo "isoQUANT file ${NAME}.gtf exists. Skipping..."
             tput sgr0
         else
-            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME" > /dev/null
             bash ~/nano-pipe/template.sh "$NAME" ISOQUANT
         fi
         # BAMBU
