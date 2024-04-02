@@ -7,10 +7,10 @@ Created on Thu Feb 29 10:48:24 2024
 
 import gffutils
 
-filename = "E:/refData/output_file1.gtf"
+filename = "E:/refData/current/gencode45_chrIS_SIRV.gtf"
 oldfile = "D:/refData/lrgasp_gencode_v38_sirvs.gtf"
 db = gffutils.create_db(filename,
-":memory:",
+"E:/refData/current/gencode45_chrIS_SIRV.db",
 keep_order=True,
 force=  True, 
 disable_infer_genes=True, disable_infer_transcripts=True,
