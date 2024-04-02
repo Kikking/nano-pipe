@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-COUNT=1
+COUNT=10
 LENGTH=9000
-LENGTHSD=2000
+LENGTHSD=500
 ACCURACY=0.85
 
 while getopts L:A:C:S: flag

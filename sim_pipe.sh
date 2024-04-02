@@ -89,35 +89,53 @@ MAPPING() {
 # Read the CSV file line by line
 sed 1d ${PARAMETER_FILE} | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURACY; do
     # Process each field (value)
+    if [ $COUNT != 0 ]; then
     tput setaf 5
     echo "Count: $COUNT"
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -C ${COUNT}
     echo "------"
-    NAME=sd_${COUNT}_9000-2000_0.85
+    NAME=sd_${COUNT}_9000-500_0.85
     sleep 5
     MAPPING
     ALL_ID
+    else
+    tput setaf 6
+    echo "SKIPPING"
+    tput sgr0
+    fi
     
+    if [ $LENGTH != 0 ]; then
     tput setaf 5
     echo "Length: $LENGTH"
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -L ${LENGTH}
     echo "------"
-    NAME=sd_1_${LENGTH}-2000_0.85
+    NAME=sd_10_${LENGTH}-500_0.85
     sleep 5
     MAPPING
     ALL_ID
-    
+    else
+    tput setaf 6
+    echo "SKIPPING"
+    tput sgr0
+    fi
+
+    if [ $ACCURACY != 0 ]; then
     tput setaf 5
     echo "Accuracy: $ACCURACY"
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY} -S ${SAMPLE_FILE}
     echo "------"
-    NAME=sd_1_9000-2000_${ACCURACY}
+    NAME=sd_10_9000-500_${ACCURACY}
     sleep 5
     MAPPING
     ALL_ID
+    else
+    tput setaf 6
+    echo "SKIPPING"
+    tput sgr0
+    fi
    
 
 done
