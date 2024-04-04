@@ -4,7 +4,7 @@ MAP_LOG="MAPPING.log"
 
 COUNT=10
 LENGTH=9000
-LENGTHSD=1500
+LENGTHSD=2000
 ACCURACY=0.85
 
 while getopts P:S: flag
@@ -100,7 +100,7 @@ sed 1d ${PARAMETER_FILE} | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURAC
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -C ${COUNT}
     echo "------"
-    NAME=sd_${COUNT}_9000-1500_0.85
+    NAME=sd_${COUNT}_9000-2000_0.85
     sleep 5
     MAPPING
     ALL_ID
@@ -116,7 +116,7 @@ sed 1d ${PARAMETER_FILE} | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURAC
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -S ${SAMPLE_FILE} -L ${LENGTH}
     echo "------"
-    NAME=sd_10_${LENGTH}-1500_0.85
+    NAME=sd_10_${LENGTH}-2000_0.85
     sleep 5
     MAPPING
     ALL_ID
@@ -132,7 +132,7 @@ sed 1d ${PARAMETER_FILE} | while IFS=$'\t' read -r COUNT LENGTH LENGTHSD ACCURAC
     tput sgr0
     bash ~/nano-pipe/ID/datasim/pbsimmer.sh -A ${ACCURACY} -S ${SAMPLE_FILE}
     echo "------"
-    NAME=sd_10_9000-1500_${ACCURACY}
+    NAME=sd_10_9000-2000_${ACCURACY}
     sleep 5
     MAPPING
     ALL_ID
