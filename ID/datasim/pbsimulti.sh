@@ -19,7 +19,7 @@ done
 
 
 
-for SAMPLE_FILE in $(ls $SAMPLE_DIR/*); do
+for SAMPLE_FILE in $(ls ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/*); do
 ID=$((ID+1))
 
 awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/${SAMPLE_FILE} > ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/${SAMPLE_FILE}_"$COUNT"
