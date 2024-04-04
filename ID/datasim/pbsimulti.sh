@@ -22,11 +22,11 @@ done
 for SAMPLE_FILE in $(ls ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/*); do
 ID=$((ID+1))
 
-awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/${SAMPLE_FILE} > ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/${SAMPLE_FILE}_"$COUNT"
+awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
 
  pbsim --strategy trans --method errhmm \
  --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
- --transcript ~/pbsim3-3.0.4/sample/$SAMPLE_DIR/${SAMPLE_FILE}_$COUNT \
+ --transcript ${SAMPLE_FILE}_$COUNT \
  --prefix "/mnt/e/pbsimulti/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${ID}"  \
  --length-mean $LENGTH \
  --length-sd $LENGTHSD \
