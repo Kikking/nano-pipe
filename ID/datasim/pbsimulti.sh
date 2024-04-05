@@ -35,3 +35,12 @@ awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE
  echo REMOVING ${SAMPLE_FILE}_"$COUNT"
  rm ${SAMPLE_FILE}_"$COUNT"
  done
+
+tput setaf 6
+echo ":::: MERGINg ::::"
+find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_M.fastq
+echo ":::: CLEANING ::::"
+rm /mnt/e/pbsimulti/* 
+tput setaf 8
+echo "KEY: sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_M" 
+tput sgr0
