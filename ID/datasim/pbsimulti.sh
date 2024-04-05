@@ -59,8 +59,11 @@ run_pbsim() {
 for SAMPLE_FILE in ~/pbsim3-3.0.4/sample/"$SAMPLE_DIR"/*; do
     ID=$((ID+1))
 
+    #Multiply count values by set count value
+    awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
+
     # Run pbsim command with retry logic
-    if ! run_pbsim "$SAMPLE_FILE" "$ID"; then
+    if ! run_pbsim ${sample_file} "${id}"; then
         echo "${RED}Error: PBSIM command failed for $SAMPLE_FILE${RESET}"
         exit 1
     fi
