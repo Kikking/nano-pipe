@@ -30,5 +30,8 @@ awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE
  --prefix "/mnt/e/pbsimulti/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${ID}"  \
  --length-mean $LENGTH \
  --length-sd $LENGTHSD \
- --accuracy-mean $ACCURACY 
+ --accuracy-mean $ACCURACY
+
+ echo REMOVING ${SAMPLE_FILE}_"$COUNT"
+ rm ${SAMPLE_FILE}_"$COUNT"
  done
