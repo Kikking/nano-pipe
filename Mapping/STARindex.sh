@@ -1,7 +1,10 @@
 #!/bin/bash
 
+SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
+SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtff
+
 STAR --runThreadN 8 \
 --runMode genomeGenerate \
 --genomeDir /mnt/e/refData/star_index/ \
---genomeFastaFiles /mnt/e/refData/hg38_sequins_SIRV_ERCCs_longSIRVs.fa \
---sjdbGTFfile /mnt/e/refdata/hg38_sequins_SIRV_ERCCs_longSIRVs_v5_reformatted.gtf
+--genomeFastaFiles $SIRV_REF \
+--sjdbGTFfile $SIRV_ANNO
