@@ -8,6 +8,6 @@ STAR  alignReads --genomeDir $INDEX  \
  --readFilesIn $READ1 $READ2 \
  --runThreadN 6 \
  --genomeLoad LoadAndKeep \
- --genomeChrBinNbits min(18, log2[max(GenomeLength/NumberOfReferences,ReadLength)]) \
+ --genomeChrBinNbits "min(18, log2[max(GenomeLength/NumberOfReferences,ReadLength)])" \
  --genomeSAindexNbases 10 \
  --genomeSAsparseD 2  
