@@ -2,8 +2,8 @@
 
 # Define variables
 INDEX="/mnt/e/refData/STAR_index"
-READ1="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate3_run1/SGNex_Hct116_Illumina_replicate3_run1_R1_val_1.fq.gz"
-READ2="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate3_run1/SGNex_Hct116_Illumina_replicate3_run1_R2_val_2.fq.gz"
+READ1="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate3_run1/SGNex_Hct116_Illumina_replicate3_run1_R1_val_1.fq"
+READ2="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate3_run1/SGNex_Hct116_Illumina_replicate3_run1_R2_val_2.fq"
 
 # Calculate genomeChrBinNbits value (replace this with a constant integer)
 #GENOME_CHR_BIN_NBITS=18
