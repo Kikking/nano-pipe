@@ -6,7 +6,7 @@ READ1="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate4_run1/SGNex_Hct116_Ill
 READ2="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate4_run1/SGNex_Hct116_Illumina_replicate4_run1_R2_val_2.fq"
 
 # Calculate genomeChrBinNbits value (replace this with a constant integer)
-#GENOME_CHR_BIN_NBITS=18
+GENOME_CHR_BIN_NBITS=18
 
 # Run STAR with correct parameters
 STAR --runMode alignReads \
