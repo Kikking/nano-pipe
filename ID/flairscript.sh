@@ -15,14 +15,14 @@ flair correct -q /mnt/e/flair_realm/${TARGET}.bed12 \
  --print_check
 
 echo ":::BED IS COLLAPSING!!:::::>"
-flair collapse -q reads.flair_all_corrected.bed \
--r $TARGET.fastq \
--g $SIRV_REF --gtf $SIRV_ANNO \ 
+flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
+-r /mnt/d/SGNEX/fq/${TARGET}.fastq \
+-g $SIRV_REF --gtf $SIRV_ANNO \
 --stringent \
 --check_splice \
 --generate_map \
 --annotation_reliant generate \
 --support 1
 
-echo ":::QUANTIFYING:::::>"
-flair quantify -r reads_manifest -i flair.collapse.isoforms.fa
+#echo ":::QUANTIFYING:::::>"
+#flair quantify -r reads_manifest -i flair.collapse.isoforms.fa
