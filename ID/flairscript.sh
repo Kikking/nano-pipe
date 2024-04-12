@@ -22,7 +22,7 @@ flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
 --generate_map \
 --annotation_reliant generate \
 --support 1 \
---output /mnt/d/SGNEX/GTF_files/flair/${TARGET} \
+--output /mnt/d/SGNEX/GTF_files/flair/${TARGET}/${TARGET} \
 --threads 10
 
 #echo ":::QUANTIFYING:::::>"
