@@ -11,8 +11,7 @@ echo ":::CORRECTING BED:::::>"
 flair correct -q /mnt/e/flair_realm/${TARGET}.bed12 \
  -f $SIRV_ANNO -g $SIRV_REF \
  --output /mnt/e/flair_realm/${TARGET} \
- --threads 8 \
- --print_check
+ --threads 10 
 
 echo ":::BED IS COLLAPSING!!:::::>"
 flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
@@ -22,7 +21,9 @@ flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
 --check_splice \
 --generate_map \
 --annotation_reliant generate \
---support 1
+--support 1 \
+--output /mnt/d/SGNEX/GTF_files/flair/${TARGET} \
+--threads 10
 
 #echo ":::QUANTIFYING:::::>"
 #flair quantify -r reads_manifest -i flair.collapse.isoforms.fa
