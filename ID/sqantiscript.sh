@@ -3,7 +3,7 @@
 SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.db
 TARGET="$1"
-TOOL="$2" # b = bambu, s = stringtie , i = isoquant
+TOOL="$2" # b = bambu, s = stringtie , i = isoquant , f = flair
 
 case "$TOOL" in
   b)
@@ -19,7 +19,7 @@ case "$TOOL" in
     KEY=isoquant
     ;;
   f)
-    INDIR=flair/${TARGET}/${TARGET}.gtf
+    INDIR=flair/${TARGET}/${TARGET}.isoforms.gtf
     KEY=flair
     ;;
 

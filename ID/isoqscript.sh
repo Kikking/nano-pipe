@@ -8,8 +8,16 @@ SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.db
 NAME=$1
 echo "indexing..."
 time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam 
+
 echo "quanting..."
-time isoquant.py --force --reference $SIRV_REF --prefix $NAME --genedb $SIRV_ANNO --complete_genedb --clean_start -t 8 --high_memory --bam  /mnt/d/SGNEX/mini_bam/${NAME}.bam --data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/
+isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
+--prefix $NAME \
+--complete_genedb \
+--clean_start --force \
+-t 8 --high_memory \
+--bam /mnt/d/SGNEX/mini_bam/${NAME}.bam \
+--data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/
+
 echo "renaming..." 
 time mv /mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.extended_annotation.gtf /mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.gtf 
 

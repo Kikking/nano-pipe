@@ -5,7 +5,7 @@ SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TARGET=$1
 
 echo ":::PUTTING $TARGET TO BED:::::>"
-bam2Bed12 -i /mnt/d/SGNEX/mini_bam/${TARGET}.bam > /mnt/e/flair_realm/sd_1_9000-2000_0.85.bed12
+bam2Bed12 -i /mnt/d/SGNEX/mini_bam/${TARGET}.bam > /mnt/e/flair_realm/${TARGET}.bed12
 
 echo ":::CORRECTING BED:::::>"
 flair correct -q /mnt/e/flair_realm/${TARGET}.bed12 \
