@@ -14,6 +14,7 @@ flair correct -q /mnt/e/flair_realm/${TARGET}.bed12 \
  --threads 10 
 
 echo ":::BED IS COLLAPSING!!:::::>"
+mkdir /mnt/d/SGNEX/GTF_files/flair/${TARGET}
 flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
 -r /mnt/d/SGNEX/fq/${TARGET}.fastq \
 -g $SIRV_REF --gtf $SIRV_ANNO \
