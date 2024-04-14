@@ -13,7 +13,7 @@ STAR --runMode alignReads \
      --genomeDir "$INDEX" \
      --readFilesIn "$READ1" "$READ2" \
      --runThreadN 6 \
-     --genomeLoad LoadAndKeep \
+     --genomeLoad LoadAndRemove \
      --genomeChrBinNbits "$GENOME_CHR_BIN_NBITS" \
      --genomeSAindexNbases 10 \
      --genomeSAsparseD 2
