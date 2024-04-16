@@ -41,6 +41,7 @@ print_message "::: QUANTIFYING... :::::" "$PURPLE"
 print_message "::: QUANTIFYING Done :::::" "$GREEN"
 
 # Move .gtf and .esp files to destination directory
+mkdir -p /mnt/d/SGNEX/GTF_files/espresso/${TARGET}
 print_message "::: MOVING .gtf and .esp Files... :::::" "$PURPLE"
 find "/mnt/e/espresso_realm/${TARGET}/" -name "*.gtf" -exec mv {} "/mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf" \;
 find "/mnt/e/espresso_realm/${TARGET}/" -name "*.esp" -exec mv {} "/mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.esp" \;
