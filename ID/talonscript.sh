@@ -23,11 +23,18 @@ print_message() {
     echo "${color}${message}${RESET}"
 }
 
+file_exists() {
+    local file="$1"
+    [[ -f "$file" ]]
+}
+
 # Create SAM file
+
+if ! file_exists "/mnt/e/talon_realm/${TARGET}/${TARGET}.sam"; then
 print_message "::: SAMMING... :::::" "$PURPLE"
 samtools view -h "/mnt/d/SGNEX/mini_bam/${TARGET}.bam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.sam"
 print_message "::: SAMMING Done :::::" "$GREEN"
-
+fi
 # Create CSV Config File
 print_message "::: Creating CSV Config File... :::::" "$PURPLE"
 echo "${TARGET},single_run,ONT,/mnt/e/talon_realm/${TARGET}/${TARGET}_labeled.sam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv"
@@ -43,6 +50,7 @@ talon_label_reads \
 print_message "::: LABELLING Done :::::" "$GREEN"
 
 # Initialize database
+if ! file_exists "/mnt/e/talon_realm/${TARGET}/${TARGET}.db"; then 
 print_message "::: INITIALISING DATABASE... :::::" "$PURPLE"
 talon_initialize_database \
   --f "$SIRV_ANNO" \
@@ -50,8 +58,10 @@ talon_initialize_database \
   --a SIRV_annotation \
   --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
 print_message "::: DATABASE Initialised :::::" "$GREEN"
+fi
 
 # Identify isoforms
+if ! file_exists "/mnt/e/talon_realm/${TARGET}/${TARGET}_talon_read_annot.tsv"; then 
 print_message "::: IDENTIFYING ISOFORMS... :::::" "$PURPLE"
 talon \
   --f "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv" \
@@ -60,6 +70,7 @@ talon \
   --threads 10 \
   --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
 print_message "::: ISOFORMS Identified :::::" "$GREEN"
+fi
 
 # Filter transcripts
 print_message "::: FILTERING... :::::" "$PURPLE"
@@ -70,6 +81,7 @@ talon_filter_transcripts \
 print_message "::: FILTERING Done :::::" "$GREEN"
 
 # Quantify abundance
+if ! file_exists "/mnt/e/talon_realm/${TARGET}/${TARGET}_talon_abundance_filtered.tsv"; then 
 print_message "::: QUANTIFYING... :::::" "$PURPLE"
 talon_abundance \
   --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
@@ -78,8 +90,10 @@ talon_abundance \
   -b grch38 \
   --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
 print_message "::: QUANTIFICATION Done :::::" "$GREEN"
+fi
 
 # Create GTF
+if ! file_exists "/mnt/e/talon_realm/${TARGET}/${TARGET}_talon_observedOnly.gtf"; then 
 print_message "::: GTFing... :::::" "$PURPLE"
 talon_create_GTF \
   --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
@@ -89,3 +103,12 @@ talon_create_GTF \
   --observed \
   --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
 print_message "::: GTF Creation Done :::::" "$GREEN"
+fi
+
+# Move .gtf and .esp files to destination directory
+mkdir -p /mnt/d/SGNEX/GTF_files/talon/${TARGET}
+print_message "::: MOVING .gtf and abundance_filtered.tsv Files... :::::" "$PURPLE"
+find "/mnt/e/talon_realm/${TARGET}/" -name "*.gtf" -exec mv {} "/mnt/d/SGNEX/GTF_files/talon/${TARGET}/${TARGET}.gtf" \;
+find "/mnt/e/talon_realm/${TARGET}/" -name "*abundance_filtered.tsv" -exec mv {} "/mnt/d/SGNEX/GTF_files/talon/${TARGET}/${TARGET}.tsv" \;
+print_message "::: Files Moved :::::" "$GREEN"
+
