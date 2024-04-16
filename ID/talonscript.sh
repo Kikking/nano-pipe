@@ -30,7 +30,7 @@ print_message "::: SAMMING Done :::::" "$GREEN"
 
 # Create CSV Config File
 print_message "::: Creating CSV Config File... :::::" "$PURPLE"
-echo "${TARGET},single_run,ONT,/mnt/e/talon_realm/${TARGET}/${TARGET}.sam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv"
+echo "${TARGET},single_run,ONT,/mnt/e/talon_realm/${TARGET}/${TARGET}_labeled.sam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv"
 print_message "::: Created ${TARGET}.csv :::::" "$GREEN"
 
 # Label reads
@@ -73,7 +73,7 @@ print_message "::: FILTERING Done :::::" "$GREEN"
 print_message "::: QUANTIFYING... :::::" "$PURPLE"
 talon_abundance \
   --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
-  -a "$SIRV_ANNO" \
+  -a SIRV_annotation \
   --whitelist "/mnt/e/talon_realm/${TARGET}/snowwhitelist" \
   -b grch38 \
   --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
