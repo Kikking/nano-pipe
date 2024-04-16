@@ -22,7 +22,7 @@ echo "::: CORRECTING... :::::>"
 ~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_C.pl -I /mnt/e/espresso_realm/${TARGET} -F $SIRV_REF -X 0
 
 echo "::: QUANTIFYING... :::::>"
-~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_Q.pl -A $SIRV_ANNO -L /mnt/e/espresso_realm/${TARGET}/samples.tsv.updated
+~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_Q.pl -A $SIRV_ANNO -L /mnt/e/espresso_realm/${TARGET}/${TARGET}.tsv.updated
 
 echo "::: MOVING... :::::>"
 mv /mnt/e/espresso_realm/${TARGET}/samples_N2_R0_updated.gtf /mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf
