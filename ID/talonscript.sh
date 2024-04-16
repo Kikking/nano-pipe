@@ -1,32 +1,91 @@
-#!/bin/bash 
-CONFIG_FILE=/mnt/e/talon_config1.csv
-DB_FILE=/mnt/e/tdb2.db
-talon --f /mnt/e/talon_config1.csv --db /mnt/e/tdb2.db --build hg38 --nsg --o talon_test 
+#!/bin/bash
+SIRV_REF="/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa"
+SIRV_ANNO="/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf"
+TARGET="$1"
 
-"""
-optional arguments:
-  -h, --help            show this help message and exit  
-  --f CONFIG_FILE       Dataset config file: dataset name, sample description,
-                        platform, sam file (comma-delimited)  
-  --db FILE,            TALON database. Created using
-                        talon_initialize_database
-  --cb                  Use cell barcode tags to determine dataset. Useful for
-                        single-cell data. Requires 3-entry config file.
-  --build STRING,       Genome build (i.e. hg38) to use. Must be in the
-                        database.
-  --threads THREADS, -t THREADS
-                        Number of threads to run program with.
-  --cov MIN_COVERAGE, -c MIN_COVERAGE
-                        Minimum alignment coverage in order to use a SAM
-                        entry. Default = 0.9
-  --identity MIN_IDENTITY, -i MIN_IDENTITY
-                        Minimum alignment identity in order to use a SAM
-                        entry. Default = 0.8
-  --nsg, --create_novel_spliced_genes
-                        Make novel genes with the intergenic novelty label for
-                        transcripts that don't share splice junctions with any
-                        other models
-  --tmpDir
-                        Path to directory for tmp files. Default = `talon_tmp/`
-  --o OUTPREFIX         Prefix for output files
-  """
+# Define tput color codes
+RED=$(tput setaf 1)      # Red color for errors
+GREEN=$(tput setaf 2)    # Green color for success
+PURPLE=$(tput setaf 5)   # Purple color for progress
+RESET=$(tput sgr0)       # Reset color
+
+if [ -z "$TARGET" ]; then
+    echo "${RED}Error: Please provide a target argument.${RESET}"
+    exit 1
+fi
+
+mkdir -p "/mnt/e/talon_realm/${TARGET}"
+
+# Function to echo colored messages
+print_message() {
+    local message="$1"
+    local color="$2"
+    echo "${color}${message}${RESET}"
+}
+
+# Create SAM file
+print_message "::: SAMMING... :::::" "$PURPLE"
+samtools view -h "/mnt/d/SGNEX/mini_bam/${TARGET}.bam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.sam"
+print_message "::: SAMMING Done :::::" "$GREEN"
+
+# Create CSV Config File
+print_message "::: Creating CSV Config File... :::::" "$PURPLE"
+echo "${TARGET},single_run,ONT,/mnt/e/talon_realm/${TARGET}/${TARGET}.sam" > "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv"
+print_message "::: Created ${TARGET}.csv :::::" "$GREEN"
+
+# Label reads
+print_message "::: LABELLING... :::::" "$PURPLE"
+talon_label_reads \
+  --f "/mnt/e/talon_realm/${TARGET}/${TARGET}.sam" \
+  --g "$SIRV_REF" \
+  --t 10 \
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+print_message "::: LABELLING Done :::::" "$GREEN"
+
+# Initialize database
+print_message "::: INITIALISING DATABASE... :::::" "$PURPLE"
+talon_initialize_database \
+  --f "$SIRV_ANNO" \
+  --g grch38 \
+  --a SIRV_annotation \
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+print_message "::: DATABASE Initialised :::::" "$GREEN"
+
+# Identify isoforms
+print_message "::: IDENTIFYING ISOFORMS... :::::" "$PURPLE"
+talon \
+  --f "/mnt/e/talon_realm/${TARGET}/${TARGET}.csv" \
+  --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
+  --build grch38 \
+  --threads 10 \
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+print_message "::: ISOFORMS Identified :::::" "$GREEN"
+
+# Filter transcripts
+print_message "::: FILTERING... :::::" "$PURPLE"
+talon_filter_transcripts \
+  --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
+  -a SIRV_annotation \
+  --o "/mnt/e/talon_realm/${TARGET}/snowwhitelist"
+print_message "::: FILTERING Done :::::" "$GREEN"
+
+# Quantify abundance
+print_message "::: QUANTIFYING... :::::" "$PURPLE"
+talon_abundance \
+  --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
+  -a "$SIRV_ANNO" \
+  --whitelist "/mnt/e/talon_realm/${TARGET}/snowwhitelist" \
+  -b grch38 \
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+print_message "::: QUANTIFICATION Done :::::" "$GREEN"
+
+# Create GTF
+print_message "::: GTFing... :::::" "$PURPLE"
+talon_create_GTF \
+  --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
+  -b grch38 \
+  -a SIRV_annotation \
+  --whitelist "/mnt/e/talon_realm/${TARGET}/snowwhitelist" \
+  --observed \
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+print_message "::: GTF Creation Done :::::" "$GREEN"
