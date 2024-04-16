@@ -1,51 +1,72 @@
 #!/bin/bash
-SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
-SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
-# Define color codes
-RED=$(tput setaf 1)  # Red color
-RESET=$(tput sgr0)   # Reset color
 
+SIRV_REF="/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa"
+SIRV_ANNO="/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf"
+
+# Define color codes
+RED=$(tput setaf 1)    # Red color for errors
+GREEN=$(tput setaf 2)  # Green color for success
+PURPLE=$(tput setaf 5) # Purple color for progress
+RESET=$(tput sgr0)     # Reset color
 
 TARGET="$1"
 CLEAN="${2:-"clean"}"
+
+# Function to echo colored messages
+print_message() {
+    local message="$1"
+    local color="$2"
+    echo "${color}${message}${RESET}"
+}
 
 # Generate TSV file
 col1="/mnt/d/SGNEX/mini_bam/${TARGET}.bam"
 col2="$TARGET"
 echo -e "$col1\t$col2" > "/mnt/e/espresso_realm/${TARGET}.tsv"
-echo "::: Created ${TARGET}.tsv :::::>"
+print_message "::: Created ${TARGET}.tsv :::::" "$GREEN"
 
-echo "::: PREPROCESSING... :::::>"
-~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_S.pl -L /mnt/e/espresso_realm/${TARGET}.tsv -F $SIRV_REF -A $SIRV_ANNO -O /mnt/e/espresso_realm/${TARGET}
+# Preprocessing
+print_message "::: PREPROCESSING... :::::" "$PURPLE"
+~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_S.pl -L "/mnt/e/espresso_realm/${TARGET}.tsv" -F "$SIRV_REF" -A "$SIRV_ANNO" -O "/mnt/e/espresso_realm/${TARGET}"
+print_message "::: PREPROCESSING Done :::::" "$GREEN"
 
-echo "::: CORRECTING... :::::>"
-~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_C.pl -I /mnt/e/espresso_realm/${TARGET} -F $SIRV_REF -X 0
+# Correcting
+print_message "::: CORRECTING... :::::" "$PURPLE"
+~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_C.pl -I "/mnt/e/espresso_realm/${TARGET}" -F "$SIRV_REF" -X 0
+print_message "::: CORRECTING Done :::::" "$GREEN"
 
-echo "::: QUANTIFYING... :::::>"
-~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_Q.pl -A $SIRV_ANNO -L /mnt/e/espresso_realm/${TARGET}/${TARGET}.tsv.updated
+# Quantifying
+print_message "::: QUANTIFYING... :::::" "$PURPLE"
+~/perl-5.38.2/perl ~/espresso/src/ESPRESSO_Q.pl -A "$SIRV_ANNO" -L "/mnt/e/espresso_realm/${TARGET}/${TARGET}.tsv.updated"
+print_message "::: QUANTIFYING Done :::::" "$GREEN"
 
-echo "::: MOVING... :::::>"
-mv /mnt/e/espresso_realm/${TARGET}/samples_N2_R0_updated.gtf /mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf
-mv /mnt/e/espresso_realm/${TARGET}/samples_N2_R0_abundance.esp /mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.esp
+# Move .gtf and .esp files to destination directory
+print_message "::: MOVING .gtf and .esp Files... :::::" "$PURPLE"
+find "/mnt/e/espresso_realm/${TARGET}/" -name "*.gtf" -exec mv {} "/mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf" \;
+find "/mnt/e/espresso_realm/${TARGET}/" -name "*.esp" -exec mv {} "/mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.esp" \;
+print_message "::: Files Moved :::::" "$GREEN"
 
+# Clean up based on CLEAN option
 case "$CLEAN" in
     force)
-        echo "Removing /mnt/e/espresso_realm/${TARGET}"
+        print_message "Removing /mnt/e/espresso_realm/${TARGET}" "$PURPLE"
         rm -r "/mnt/e/espresso_realm/${TARGET}"
+        print_message "Cleanup Completed" "$GREEN"
         ;;
     clean)
         if [ -e "/mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf" ]; then
-            echo "Removing /mnt/e/espresso_realm/${TARGET}"
+            print_message "Removing /mnt/e/espresso_realm/${TARGET}" "$PURPLE"
             rm -r "/mnt/e/espresso_realm/${TARGET}"
+            print_message "Cleanup Completed" "$GREEN"
         else
-            echo "${RED}File /mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf does not exist. Keeping /mnt/e/espresso_realm/${TARGET}${RESET}"
+            print_message "${RED}File /mnt/d/SGNEX/GTF_files/espresso/${TARGET}/${TARGET}.gtf does not exist. Keeping /mnt/e/espresso_realm/${TARGET}" "$RED"
         fi
         ;;
     keep)
-        echo "################ KEPT TMP FILES ##########################"
+        print_message "################ KEPT TMP FILES ##########################" "$PURPLE"
         ;;
     *)
-        echo "Error: Invalid clean option '$CLEAN'."
+        print_message "Error: Invalid clean option '$CLEAN'." "$RED"
         exit 1
         ;;
 esac
