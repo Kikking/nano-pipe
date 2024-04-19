@@ -11,7 +11,7 @@ ENV_ISOQUANT="isoquant"
 # Function to activate Conda environment
 activate_env() {
     local env_name="$1"
-    source activate "$env_name"
+    conda activate "$env_name"
 }
 
 # Function to log messages with color
