@@ -17,6 +17,8 @@ if ! file_exists "/mnt/e/tksm_realm/${TARGET}_tksm.tsv"; then
 tksm abundance \
 --paf /mnt/e/tksm_realm/$TARGET.paf \
 --output /mnt/e/tksm_realm/${TARGET}_tksm.tsv 
+awk 'BEGIN {FS=OFS="\t"} {sub(/\|.*$/, "", $1); print}' /mnt/e/tksm_realm/${TARGET}_tksm.tsv > /mnt/e/tksm_realm/tmp.tsv
+mv /mnt/e/tksm_realm/tmp.tsv /mnt/e/tksm_realm/${TARGET}_tksm.tsv 
 fi
 
 ABTAB=/mnt/e/tksm_realm/${TARGET}_tksm.tsv 

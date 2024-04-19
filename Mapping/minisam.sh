@@ -8,3 +8,4 @@ NAME=$1
 
 minimap2 -ax splice $SIRV_REF -t 10 --MD /mnt/d/SGNEX/fq/${NAME}.fastq | samtools view -b | samtools sort > /mnt/d/SGNEX/mini_bam/${NAME}.bam
 
+bash ~/nano-pipe/ID/talonscript.sh Hc_d_r4r1
