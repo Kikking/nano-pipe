@@ -4,6 +4,7 @@ SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TARGET="$1"
 TOOL="$2" # b = bambu, s = stringtie , i = isoquant , f = flair
+REP=$3
 
 case "$TOOL" in
   b)
@@ -21,6 +22,14 @@ case "$TOOL" in
   f)
     INDIR=flair/${TARGET}/${TARGET}.isoforms.gtf
     KEY=flair
+    ;;
+  e)
+    INDIR=espresso/${TARGET}/${TARGET}.gtf
+    KEY=espresso
+    ;;
+  t)
+    INDIR=talon/${TARGET}/${TARGET}.gtf
+    KEY=talon
     ;;
 
   *)
@@ -41,6 +50,7 @@ python ~/SQANTI3/sqanti3_qc.py \
   -d "/mnt/d/SGNEX/sqantout/${KEY}/${TARGET}/" \
   --polyA_motif_list ~/SQANTI3/data/polyA_motifs/mouse_and_human.polyA_motif.txt \
   --CAGE_peak ~/SQANTI3/data/ref_TSS_annotation/human.refTSS_v3.1.hg38.bed \
+  -c /mnt/e/star_stuff/rep${REP}/SJ.out.tab \
   --skipORF \
   --cpus 10 \
   --report pdf
