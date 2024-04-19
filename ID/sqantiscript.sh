@@ -40,8 +40,8 @@ esac
 
 if [[ "$TOOL" == "s" ]]; then
     # Only perform awk command if tool is stringtie
-    awk -F'\t' 'BEGIN {OFS="\t"} {if ($7 == ".") $7 = "+"} 1' "$INDIR" > tmp.gtf
-    mv tmp.gtf ${INDIR}
+    awk -F'\t' 'BEGIN {OFS="\t"} {if ($7 == ".") $7 = "+"} 1' "/mnt/d/SGNEX/GTF_files/$INDIR" > tmp.gtf
+    mv tmp.gtf /mnt/d/SGNEX/GTF_files/$INDIR
 fi
 
 # Run Sqanti script
