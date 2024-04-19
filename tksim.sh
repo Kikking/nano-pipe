@@ -1,7 +1,7 @@
 #!/bin/bash
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TRANS_REF=/mnt/e/refData/latest/gencode.v44.transcripts.fa
-TARGET=/mnt/e/tksm_realm/sd_1_9000-2000_0.85.paf
+TARGET=sd_1_9000-2000_0.85
 PRESET=$1
 CYCLE=$2
 
@@ -15,7 +15,7 @@ file_exists() {
 
 if ! file_exists "/mnt/e/tksm_realm/${TARGET}_tksm.tsv"; then
 tksm abundance \
---paf $TARGET \
+--paf /mnt/e/tksm_realm/$TARGET.paf \
 --output /mnt/e/tksm_realm/${TARGET}_tksm.tsv 
 fi
 
