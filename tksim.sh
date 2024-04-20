@@ -47,5 +47,7 @@ tksm sequence \
 --output-format fastq \
 --perfect /mnt/d/SGNEX/fq/${PRESET}_${MOL_NUM}_${CYCLE}.fastq
 
+echo "KEY: ${PRESET}_${MOL_NUM}_${CYCLE}"
+
 
 
