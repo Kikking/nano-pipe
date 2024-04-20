@@ -1,6 +1,7 @@
 #!/bin/bash
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TRANS_REF=/mnt/e/refData/latest/gencode.v44.transcripts.fa
+SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
 TARGET=sd_1_9000-2000_0.85
 PRESET=$1
 CYCLE=$2
@@ -42,7 +43,7 @@ tksm pcr -i /mnt/e/tksm_realm/1000.MDF \
 
 
 tksm sequence \
--r $TRANS_REF \
+-r $SIRV_REF \
 -i /mnt/e/tksm_realm/${PRESET}_${MOL_NUM}_${CYCLE}.MDF \
 --output-format fastq \
 --perfect /mnt/d/SGNEX/fq/${PRESET}_${MOL_NUM}_${CYCLE}.fastq
