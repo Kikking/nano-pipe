@@ -5,6 +5,9 @@ SAMPLE=$1
 ID_LOG="ALL_ID.log"
 MAP_LOG="MAPPING.log"
 
+source ~/miniconda3/etc/profile.d/conda.sh
+eval "$(conda shell.bash hook)"
+
 # Define Conda environments for each tool
 ENV_FLAIR="flair"
 ENV_TALON="talon"
