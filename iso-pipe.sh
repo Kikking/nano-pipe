@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SAMPLE=$1
+QUICK=${2:-f}
 # Define log file paths
 ID_LOG="ALL_ID.log"
 MAP_LOG="MAPPING.log"
@@ -34,6 +35,38 @@ log_message() {
 }
 
 # Function to perform ID tasks
+QUICK_ID() {
+    local NAME="$SAMPLE"
+    local BAM_FILE="/mnt/d/SGNEX/mini_bam/${NAME}.bam"
+
+    if [ -f "$BAM_FILE" ]; then
+        log_message "File ${NAME}.bam exists. Proceeding..." "${GREEN}"
+
+        # STRINGTIE
+        STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf"
+        if [ ! -f "$STRING_PATH" ]; then
+            log_message "Running STRINGTIE for $NAME..." "${YELLOW}"
+            time bash ~/nano-pipe/ID/string.sh "$NAME"
+            bash ~/nano-pipe/template.sh "$NAME" STRINGTIE
+        else
+            log_message "STRING file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
+        fi
+
+        # ISOQUANT
+        ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.gtf"
+        if [ ! -f "$ISOQUANT_PATH" ]; then
+            log_message "Running isoQUANT for $NAME..." "${YELLOW}"
+            activate_env "$ENV_ISOQUANT"
+            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME"
+            bash ~/nano-pipe/template.sh "$NAME" ISOQUANT
+        else
+            log_message "isoQUANT file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
+        fi
+    else
+        log_message "File ${BAM_FILE} does not exist. Writing to log file ${ID_LOG}..." "${RED}"
+        echo "File ${BAM_FILE} does not exist." >> "$ID_LOG"
+    fi
+}
 ALL_ID() {
     local NAME="$SAMPLE"
     local BAM_FILE="/mnt/d/SGNEX/mini_bam/${NAME}.bam"
@@ -132,4 +165,9 @@ MAPPING() {
 
 # Call the functions
 MAPPING
+
+if [$QUICK == "q"];then
+QUICK_ID
+else
 ALL_ID
+fi
