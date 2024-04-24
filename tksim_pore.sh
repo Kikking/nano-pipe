@@ -34,14 +34,17 @@ tksm transcribe -g $SIRV_ANNO \
 --use-whole-id \
 --molecule-count ${MOL_NUM}
 fi
-for YEAR in $MODEL;do
-echo $YEAR
-tksm sequence \
--r $SIRV_REF \
--i /mnt/e/tksm_realm/${MOL_NUM}.MDF \
---output-format fastq \
---badread-error-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.error.gz \
---badread-qscore-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.qscore.gz \
---badread /mnt/d/SGNEX/fq/bad_${MOL_NUM}_${YEAR}.fastq \
---perfect /mnt/d/SGNEX/fq/per_${MOL_NUM}_${YEAR}.fastq
+
+for YEAR in "${MODEL[@]}"; do
+    if ! file_exists "/mnt/d/SGNEX/fq/bad_${MOL_NUM}_${YEAR}.fastq"; then
+        echo $YEAR
+        tksm sequence \
+        -r $SIRV_REF \
+        -i /mnt/e/tksm_realm/${MOL_NUM}.MDF \
+        --output-format fastq \
+        --badread-error-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.error.gz \
+        --badread-qscore-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.qscore.gz \
+        --badread /mnt/d/SGNEX/fq/bad_${MOL_NUM}_${YEAR}.fastq \
+        --perfect /mnt/d/SGNEX/fq/per_${MOL_NUM}_${YEAR}.fastq
+    fi
 done
