@@ -2,6 +2,8 @@
 
 SAMPLE=$1
 QUICK=${2:-f}
+
+
 # Define log file paths
 ID_LOG="ALL_ID.log"
 MAP_LOG="MAPPING.log"
@@ -166,7 +168,7 @@ MAPPING() {
 # Call the functions
 MAPPING
 
-if [$QUICK == "q"];then
+if [ $QUICK == "q" ];then
 QUICK_ID
 else
 ALL_ID
