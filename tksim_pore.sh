@@ -1,10 +1,12 @@
 #!/bin/bash
+
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TRANS_REF=/mnt/e/refData/latest/gencode.v44.transcripts.fa
 SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
 TARGET=sd_1_9000-2000_0.85
-PRESET=$1
-CYCLE=$2
+MODEL=18,20,23
+MOL_NUM=$1
+
 
 
 file_exists() {
@@ -25,30 +27,21 @@ fi
 ABTAB=/mnt/e/tksm_realm/${TARGET}_tksm.tsv 
 echo "ABTAB: ${ABTAB}"
 
-if ! file_exists "/mnt/e/tksm_realm/1000.MDF"; then
+if ! file_exists "/mnt/e/tksm_realm/${MOL_NUM}.MDF"; then
 tksm transcribe -g $SIRV_ANNO \
 -a $ABTAB \
--o /mnt/e/tksm_realm/1000.MDF \
+-o /mnt/e/tksm_realm/${MOL_NUM}.MDF \
 --use-whole-id \
---molecule-count 1000
+--molecule-count ${MOL_NUM}
 fi
-
-MOL_NUM=$(echo "scale=0; 1000 * 2^${CYCLE}" | bc)
-echo "MOL_NUM: ${MOL_NUM}"
-tksm pcr -i   \
---molecule-count $MOL_NUM \
---cycles $CYCLE \
---preset $PRESET \
--o /mnt/e/tksm_realm/${PRESET}_${MOL_NUM}_${CYCLE}.MDF
-
-
+for YEAR in $MODEL;do
+echo $YEAR
 tksm sequence \
 -r $SIRV_REF \
--i /mnt/e/tksm_realm/${PRESET}_${MOL_NUM}_${CYCLE}.MDF \
+-i /mnt/e/tksm_realm/${MOL_NUM}.MDF \
 --output-format fastq \
---perfect /mnt/d/SGNEX/fq/${PRESET}_${MOL_NUM}_${CYCLE}.fastq
-
-echo "KEY: ${PRESET}_${MOL_NUM}_${CYCLE}"
-
-
-
+--badread-error-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.error.gz \
+--badread-qscore-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.qscore.gz \
+--badread /mnt/d/SGNEX/fq/bad_${MOL_NUM}_${YEAR}.fastq \
+--perfect /mnt/d/SGNEX/fq/per_${MOL_NUM}_${YEAR}.fastq
+done
