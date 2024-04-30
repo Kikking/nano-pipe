@@ -9,16 +9,7 @@ RESET=$(tput sgr0)
 # Initialize variables
 LENGTHSD=7000
 SAMPLE_DIR="sample_1001.transcripts_dir"
-
-# Parse command-line arguments
-while getopts "L:A:C:S:" flag; do
-    case "${flag}" in
-        C) COUNT=${OPTARG} ;;
-        L) LENGTH=${OPTARG} ;;
-        A) ACCURACY=${OPTARG} ;;
-        S) SAMPLE_DIR=${OPTARG} ;;
-    esac
-done
+INPUT_FILE=$1
 
 # Function to run pbsim command with retry logic
 run_pbsim() {
@@ -52,31 +43,34 @@ run_pbsim() {
 }
 
 # Main loop to process sample files
-for SAMPLE_FILE in ~/pbsim3-3.0.4/sample/"$SAMPLE_DIR"/*; do
-    ID=$((ID+1))
+while read -r COUNT LENGTH ACCURACY _; do
+    for SAMPLE_FILE in ~/pbsim3-3.0.4/sample/"$SAMPLE_DIR"/*; do
+        ID=$((ID+1))
 
-    #Multiply count values by set count value
-    awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
+        #Multiply count values by set count value
+        awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
 
-    # Run pbsim command with retry logic
-    if ! run_pbsim ${SAMPLE_FILE} "${ID}"; then
-        echo "${RED}Error: PBSIM command failed for $SAMPLE_FILE${RESET}"
-        exit 1
-    fi
+        # Run pbsim command with retry logic
+        if ! run_pbsim ${SAMPLE_FILE} "${ID}"; then
+            echo "${RED}Error: PBSIM command failed for $SAMPLE_FILE${RESET}"
+            exit 1
+        fi
 
-    # Clean up temporary files
-    echo "${BLUE}Removing ${SAMPLE_FILE}_${COUNT}${RESET}"
-    rm "${SAMPLE_FILE}_${COUNT}"
-done
+        # Clean up temporary files
+        echo "${BLUE}Removing ${SAMPLE_FILE}_${COUNT}${RESET}"
+        rm "${SAMPLE_FILE}_${COUNT}"
+    done
 
-# Merge fastq files
-echo "${BLUE}:::: Merging ::::${RESET}"
-find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}.fastq
+    # Merge fastq files
+    echo "${BLUE}:::: Merging ::::${RESET}"
+    find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}.fastq
 
-# Clean up temporary directory
-echo "${BLUE}:::: Cleaning ::::${RESET}"
-rm /mnt/e/pbsimulti/*
+    # Clean up temporary directory
+    echo "${BLUE}:::: Cleaning ::::${RESET}"
+    rm /mnt/e/pbsimulti/*
 
-# Print key
-echo "sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
-echo "${GREEN}Key: sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
+    # Print key
+    echo "sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
+    echo "${GREEN}Key: sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
+
+done < "$INPUT_FILE"
