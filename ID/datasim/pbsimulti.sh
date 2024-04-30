@@ -7,20 +7,16 @@ BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
 # Initialize variables
-COUNT=10
-LENGTH=9000
-LENGTHSD=2000
-ACCURACY=0.85
-ID=0
+LENGTHSD=7000
+SAMPLE_DIR="sample_1001.transcripts_dir"
 
 # Parse command-line arguments
-while getopts "L:A:C:S:ID:" flag; do
+while getopts "L:A:C:S:" flag; do
     case "${flag}" in
+        C) COUNT=${OPTARG} ;;
         L) LENGTH=${OPTARG} ;;
         A) ACCURACY=${OPTARG} ;;
-        C) COUNT=${OPTARG} ;;
         S) SAMPLE_DIR=${OPTARG} ;;
-        ID) ID=${OPTARG} ;;
     esac
 done
 
@@ -38,9 +34,9 @@ run_pbsim() {
             --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
             --transcript "${sample_file}_${COUNT}" \
             --prefix "/mnt/e/pbsimulti/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${id}"  \
-            --length-mean "$LENGTH" \
-            --length-sd "$LENGTHSD" \
-            --accuracy-mean "$ACCURACY"
+            --length-min $LENGTH \
+            --length-max $(($LENGTH+100))
+
         then
             echo "${GREEN}PBSIM command successful${RESET}"
             return 0
@@ -75,11 +71,12 @@ done
 
 # Merge fastq files
 echo "${BLUE}:::: Merging ::::${RESET}"
-find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_M.fastq
+find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}.fastq
 
 # Clean up temporary directory
 echo "${BLUE}:::: Cleaning ::::${RESET}"
 rm /mnt/e/pbsimulti/*
 
 # Print key
-echo "${GREEN}Key: sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_M${RESET}"
+echo "sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
+echo "${GREEN}Key: sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
