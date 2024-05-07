@@ -22,9 +22,9 @@ run_pbsim() {
 
     while [ "$retry" -lt "$max_retries" ]; do
         if pbsim --strategy trans --method errhmm \
-            --errhmm ~/pbsim3-3.0.4/data/ERRHMM-RSII.model \
+            --errhmm ~/pbsim3-3.0.4/data/ERRHMM-ONT.model \
             --transcript "${sample_file}_${COUNT}" \
-            --prefix "/mnt/e/pbsimulti/sd_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${id}"  \
+            --prefix "/mnt/e/pbsimulti/sd3_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${id}"  \
             --length-min $LENGTH \
             --length-max $(($LENGTH+100)) \
             --accuracy-mean $ACCURACY 
@@ -64,14 +64,14 @@ while read -r COUNT LENGTH ACCURACY _; do
 
     # Merge fastq files
     echo "${BLUE}:::: Merging ::::${RESET}"
-    find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}.fastq
+    find /mnt/e/pbsimulti/ -type f -name "*.fastq" -exec cat {} + > /mnt/d/SGNEX/fq/sd3_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}.fastq
 
     # Clean up temporary directory
     echo "${BLUE}:::: Cleaning ::::${RESET}"
     rm /mnt/e/pbsimulti/*
 
     # Print key
-    echo "sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
-    echo "${GREEN}Key: sd2_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
+    echo "sd3_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
+    echo "${GREEN}Key: sd3_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
 
 done < "$INPUT_FILE"
