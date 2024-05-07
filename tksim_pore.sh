@@ -3,7 +3,7 @@
 SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 TRANS_REF=/mnt/e/refData/latest/gencode.v44.transcripts.fa
 SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
-TARGET=sd2_10_1000-7000_0.85
+TARGET=sd2_1000_1500-7000_0.95
 MODEL=("18" "20" "23")
 MOL_NUM=$1
 
@@ -36,7 +36,7 @@ tksm transcribe -g $SIRV_ANNO \
 fi
 
 for YEAR in "${MODEL[@]}"; do
-    if ! file_exists "/mnt/d/SGNEX/fq/bad2_${MOL_NUM}_${YEAR}.fastq"; then
+    if ! file_exists "/mnt/d/SGNEX/fq/bad3_${MOL_NUM}_${YEAR}.fastq"; then
         echo $YEAR
         tksm sequence \
         -r $SIRV_REF \
@@ -44,7 +44,6 @@ for YEAR in "${MODEL[@]}"; do
         --output-format fastq \
         --badread-error-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.error.gz \
         --badread-qscore-model ~/miniconda3/pkgs/tksm-0.6.0-py310h2b6aa90_0/bin/tksm_models/badread/nanopore20${YEAR}.qscore.gz \
-        --badread /mnt/d/SGNEX/fq/bad2_${MOL_NUM}_${YEAR}.fastq \
-        --perfect /mnt/d/SGNEX/fq/per2_${MOL_NUM}_${YEAR}.fastq
+        --badread /mnt/d/SGNEX/fq/bad3_${MOL_NUM}_${YEAR}.fastqs
     fi
 done
