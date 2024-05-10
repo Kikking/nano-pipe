@@ -26,7 +26,7 @@ run_pbsim() {
             --transcript "${sample_file}_${COUNT}" \
             --prefix "/mnt/e/pbsimulti/sd3_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}_${id}"  \
             --length-min $LENGTH \
-            --length-max $(($LENGTH+1000)) \
+            --length-max $(($LENGTH+100)) \
             --accuracy-mean $ACCURACY 
 
         then
