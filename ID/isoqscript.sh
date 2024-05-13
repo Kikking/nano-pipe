@@ -16,6 +16,7 @@ isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --clean_start --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${NAME}.bam \
+--matching_strategy exact \
 --data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/
 
 echo "renaming..." 
