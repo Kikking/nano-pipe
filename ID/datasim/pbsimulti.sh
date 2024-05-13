@@ -49,7 +49,7 @@ while read -r COUNT LENGTH ACCURACY _; do
         ID=$((ID+1))
 
         #Multiply count values by set count value
-        awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count);$3=($3*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
+        awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
 
         # Run pbsim command with retry logic
         if ! run_pbsim ${SAMPLE_FILE} "${ID}"; then
