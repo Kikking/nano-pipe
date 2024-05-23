@@ -9,7 +9,7 @@ RESET=$(tput sgr0)
 # Initialize variables
 TAG="sd4"
 LENGTHSD=2000
-SAMPLE_FILE="~/pbsim3-3.0.4/sample/sample_1001.transcripts"
+SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/sample_1001.transcripts"
 INPUT_FILE=$1
 
 run_pbsim() {
@@ -25,8 +25,8 @@ run_pbsim() {
             --transcript "${SAMPLE_FILE}_${COUNT}" \
             --prefix "/mnt/d/SGNEX/fq/${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}"  \
             --length-mean $LENGTH \
-            --length-min $(($LENGTH-100)) \
-            --length-max $(($LENGTH+100)) \
+            --length-min $(($LENGTH-50)) \
+            --length-max $(($LENGTH+50)) \
             --accuracy-mean $ACCURACY \
             --length-sd $LENGTHSD
 
