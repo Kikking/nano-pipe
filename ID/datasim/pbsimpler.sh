@@ -27,7 +27,8 @@ run_pbsim() {
             --length-mean $LENGTH \
             --length-min $(($LENGTH-100)) \
             --length-max $(($LENGTH+100)) \
-            --accuracy-mean $ACCURACY 
+            --accuracy-mean $ACCURACY \
+            --length-sd $LENGTHSD
 
         then
             echo "${GREEN}PBSIM command successful${RESET}"
@@ -48,7 +49,7 @@ while read -r COUNT LENGTH ACCURACY _; do
         awk -v count="$COUNT" 'BEGIN {OFS="\t"} {$2=($2*count)}1' ${SAMPLE_FILE} > ${SAMPLE_FILE}_"$COUNT"
 
         # Run pbsim command with retry logic
-        if ! run_pbsim ${SAMPLE_FILE} ; then
+        if ! run_pbsim ${SAMPLE_FILE}; then
             echo "${RED}Error: PBSIM command failed for $SAMPLE_FILE${RESET}"
             exit 1
         fi
