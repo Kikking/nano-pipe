@@ -13,7 +13,7 @@ SAMPLE_FILE="~/pbsim3-3.0.4/sample/sample_1001.transcripts"
 INPUT_FILE=$1
 
 run_pbsim() {
-    local sample_file="$1"
+    local SAMPLE_FILE="$1"
 
     # Retry parameters
     local max_retries=3
