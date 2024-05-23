@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SIRV_REF=/home/kikking/ref/GRCh38.p14_chr1S_SIRV.fa
-SIRV_ANNO=/home/kikking/ref/gencode45_chrIS_SIRV.db
+SIRV_REF=/home/kikking/long_realm/ref/GRCh38.p14_chr1S_SIRV.fa
+SIRV_ANNO=/home/kikking/long_realm/ref/gencode45_chrIS_SIRV.db
 #SIRV_ANNO=/mnt/e/refData/lrgasp_gencode_v38_sirvs.db
 #SIRV_REF=/mnt/e/refData/lrgasp_grch38_sirvs.fasta
 
