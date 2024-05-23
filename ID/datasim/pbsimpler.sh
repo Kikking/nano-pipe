@@ -53,8 +53,6 @@ while read -r COUNT LENGTH ACCURACY _; do
             echo "${RED}Error: PBSIM command failed for $SAMPLE_FILE${RESET}"
             exit 1
         fi
-    done
-
     # Print key
     echo "${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
     echo "${BLUE}Key: ${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
