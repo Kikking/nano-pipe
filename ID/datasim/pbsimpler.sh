@@ -14,7 +14,6 @@ INPUT_FILE=$1
 
 run_pbsim() {
     local sample_file="$1"
-    local id="$2"
 
     # Retry parameters
     local max_retries=3
