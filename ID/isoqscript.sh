@@ -25,7 +25,7 @@ echo "indexing..."
 time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam 
 
 echo "quanting..."
-isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
+isoquant.py --reference $SIRV_REF --genedb $ANNO \
 --prefix $NAME \
 --complete_genedb \
 --force \
