@@ -10,6 +10,16 @@ NOVEL_ANNO=/mnt/e/refData/current/gencode45_novel.db
 NAME=$1
 NOVEL=${2-f}
 
+if [ $NOVEL == "novel" ];then
+echo "________NOVEL BEGIN___________"
+ANNO=$NOVEL_ANNO
+OUT=isoquant/novel
+else 
+echo "________NORMAL BEGIN___________"
+ANNO=$SIRV_ANNO
+OUT=isoquant
+fi
+
 
 echo "indexing..."
 time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam 
@@ -21,26 +31,7 @@ isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${NAME}.bam \
---data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/
+--data_type nanopore -o /mnt/d/SGNEX/GTF_files/${OUT}/
 
 echo "renaming..." 
-time mv /mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.extended_annotation.gtf /mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.gtf 
-
-if [ $NOVEL == "novel" ];then
-echo "________NOVEL BEGIN___________"
-echo "indexing..."
-time samtools index /mnt/d/SGNEX/mini_bam/${NAME}.bam 
-
-echo "quanting..."
-isoquant.py --reference $SIRV_REF --genedb $NOVEL_ANNO \
---prefix $NAME \
---complete_genedb \
---force \
--t 8 --high_memory \
---bam /mnt/d/SGNEX/mini_bam/${NAME}.bam \
---data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/novel/
-
-echo "renaming..." 
-time mv /mnt/d/SGNEX/GTF_files/isoquant/novel/${NAME}/${NAME}.extended_annotation.gtf /mnt/d/SGNEX/GTF_files/isoquant/novel/${NAME}/${NAME}.gtf 
-
-echo "________NOVEL END___________"
+time mv /mnt/d/SGNEX/GTF_files/${OUT}/${NAME}/${NAME}.extended_annotation.gtf /mnt/d/SGNEX/GTF_files/${OUT}/${NAME}/${NAME}.gtf 
