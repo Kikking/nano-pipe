@@ -7,9 +7,9 @@ BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
 # Initialize variables
-TAG="sd4"
+TAG="sd6-8"
 LENGTHSD=2000
-SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/sample_1001.transcripts"
+SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/6-8_sample_1000.transcript"
 INPUT_FILE=$1
 
 run_pbsim() {
