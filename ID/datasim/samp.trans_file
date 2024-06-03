@@ -32,10 +32,10 @@ To Normally Distribute count Values:
         rev_stddev = 1
         for (i = 1; i <= n; i++) {
             $2 = int(for_mean + for_stddev * sqrt(-2 * log(rand())) * cos(2 * 3.14159 * rand()))
-            $3 = int(rev_mean + rev_stddev * sqrt(-2 * log(rand())) * cos(2 * 3.14159 * rand()))
+            $3 = 0
         }
-    }1' sample_1001.transcript > norm_test.txt
+    }1' 6-8_sample_1000.transcript > 6-8_sample_1000.transcript_temp
 
-    awk '{gsub(/ /,"\t")}1' norm_test.txt > sample_1001.transcripts
+    awk '{gsub(/ /,"\t")}1' 6-8_sample_1000.transcript_temp > 6-8_sample_1000.transcript
 
     rm norm_test.txt

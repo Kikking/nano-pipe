@@ -6,10 +6,10 @@ GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
-# Initialize variables
-TAG="sd0-2"
+# Initialize variables 
+TAG="sd6-8"
 LENGTHSD=2000
-SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/0-2_sample_1000.transcript"
+SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/6-8_sample_1000.transcript"
 INPUT_FILE=$1
 
 run_pbsim() {
