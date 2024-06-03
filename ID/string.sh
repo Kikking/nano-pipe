@@ -9,7 +9,7 @@ SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
 
 for NAME in "$@"; do
 echo "::STRINGING::> '$NAME'"
-time stringtie /mnt/d/SGNEX/mini_bam/${NAME}.bam -B -G $SIRV_ANNO -L -o /mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf  
+time stringtie /mnt/d/SGNEX/mini_bam/${NAME}.bam -p 10 -B -G $SIRV_ANNO -L -o /mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf  
 done
 
 
