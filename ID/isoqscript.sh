@@ -31,7 +31,7 @@ isoquant.py --reference $SIRV_REF --genedb $ANNO \
 --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${NAME}.bam \
---data_type nanopore -o /mnt/d/SGNEX/GTF_files/${OUT}/
+--data_type nanopore -o /mnt/d/SGNEX/GTF_files/${OUT}/ > /dev/null
 
 echo "renaming..." 
 time mv /mnt/d/SGNEX/GTF_files/${OUT}/${NAME}/${NAME}.extended_annotation.gtf /mnt/d/SGNEX/GTF_files/${OUT}/${NAME}/${NAME}.gtf 
