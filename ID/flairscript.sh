@@ -1,7 +1,7 @@
 #!/bin/bash 
 
-SIRV_REF=/mnt/e/refData/current/GRCh38.p14_chr1S_SIRV.fa
-SIRV_ANNO=/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf
+SIRV_REF=/home/kikking/long_realm/ref/GRCh38.p14_chr1S_SIRV.fa
+SIRV_ANNO=/home/kikking/long_realm/ref/gencode45_chrIS_SIRV.gtf
 TARGET=$1
 
 echo ":::PUTTING $TARGET TO BED:::::>"
