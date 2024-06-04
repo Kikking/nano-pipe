@@ -18,8 +18,6 @@ mkdir /mnt/d/SGNEX/GTF_files/flair/${TARGET}
 flair collapse -q /mnt/e/flair_realm/${TARGET}_all_corrected.bed \
 -r /mnt/d/SGNEX/fq/${TARGET}.fastq \
 -g $SIRV_REF --gtf $SIRV_ANNO \
---stringent \
---check_splice \
 --generate_map \
 --annotation_reliant generate \
 --support 1 \
