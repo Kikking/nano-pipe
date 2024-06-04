@@ -11,7 +11,7 @@ echo ":::CORRECTING BED:::::>"
 flair correct -q /mnt/e/flair_realm/${TARGET}.bed12 \
  -f $SIRV_ANNO -g $SIRV_REF \
  --output /mnt/e/flair_realm/${TARGET} \
- --threads 10 
+ --threads 10 > /dev/null
 
 echo ":::BED IS COLLAPSING!!:::::>"
 mkdir /mnt/d/SGNEX/GTF_files/flair/${TARGET}
