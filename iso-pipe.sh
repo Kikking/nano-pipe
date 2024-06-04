@@ -78,12 +78,6 @@ QUICK_ID() {
         else
             log_message "Flair output file exists. Skipping Flair..." "${YELLOW}"
         fi
-
-    else
-        log_message "File ${BAM_FILE} does not exist. Writing to log file ${ID_LOG}..." "${RED}"
-        echo "File ${BAM_FILE} does not exist." >> "$ID_LOG"
-    fi
-
 }
 ALL_ID() {
     local NAME="$SAMPLE"
