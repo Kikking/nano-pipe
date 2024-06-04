@@ -7,10 +7,11 @@ BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
 # Initialize variables 
-TAG="sd0-2"
-LENGTHSD=2000
-SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/0-2_sample_1000.transcript"
 INPUT_FILE=$1
+TAG=$2
+LENGTHSD=2000
+SAMPLE_FILE="/home/kikking/pbsim3-3.0.4/sample/${TAG}_sample_1000.transcript"
+
 
 run_pbsim() {
     local SAMPLE_FILE="$1"
@@ -23,7 +24,7 @@ run_pbsim() {
         if pbsim --strategy trans --method errhmm \
             --errhmm ~/pbsim3-3.0.4/data/ERRHMM-ONT.model \
             --transcript "${SAMPLE_FILE}_${COUNT}" \
-            --prefix "/mnt/d/SGNEX/fq/${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}"  \
+            --prefix "/mnt/d/SGNEX/fq/sd${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}"  \
             --length-mean $LENGTH \
             --length-min $(($LENGTH-50)) \
             --length-max $(($LENGTH+50)) \
@@ -54,7 +55,7 @@ while read -r COUNT LENGTH ACCURACY _; do
             exit 1
         fi
     # Print key
-    echo "${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
-    echo "${BLUE}Key: ${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
+    echo "sd${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}" >> ~/SIM_KEYS.txt
+    echo "${BLUE}Key: sd${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}${RESET}"
 
 done < "$INPUT_FILE"
