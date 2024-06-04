@@ -56,7 +56,7 @@ talon_initialize_database \
   --f "$SIRV_ANNO" \
   --g grch38 \
   --a SIRV_annotation \
-  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}" > /dev/null
 print_message "::: DATABASE Initialised :::::" "$GREEN"
 fi
 
@@ -68,7 +68,7 @@ talon \
   --db "/mnt/e/talon_realm/${TARGET}/${TARGET}.db" \
   --build grch38 \
   --threads 10 \
-  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}"
+  --o "/mnt/e/talon_realm/${TARGET}/${TARGET}" > /dev/null
 print_message "::: ISOFORMS Identified :::::" "$GREEN"
 fi
 

@@ -77,14 +77,14 @@ ALL_ID() {
         fi
 
         # ESPRESSO
-        ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
-        if [ ! -f "$ESPRESSO_PATH" ]; then
-            log_message "Running ESPRESSO for $NAME..." "$(tput setaf 3)"
-            activate_env "$ENV_ESPRESSO"
-            time bash ~/nano-pipe/ID/espressoscript.sh "$NAME"
-        else
-            log_message "Espresso output files exist. Skipping Espresso..." "$(tput setaf 3)"
-        fi
+      #  ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
+      #  if [ ! -f "$ESPRESSO_PATH" ]; then
+      #      log_message "Running ESPRESSO for $NAME..." "$(tput setaf 3)"
+       #     activate_env "$ENV_ESPRESSO"
+       #     time bash ~/nano-pipe/ID/espressoscript.sh "$NAME"
+      #  else
+         #   log_message "Espresso output files exist. Skipping Espresso..." "$(tput setaf 3)"
+        #fi
 
         # FLAIR
         FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.gtf"
