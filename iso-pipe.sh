@@ -68,6 +68,22 @@ QUICK_ID() {
         log_message "File ${BAM_FILE} does not exist. Writing to log file ${ID_LOG}..." "${RED}"
         echo "File ${BAM_FILE} does not exist." >> "$ID_LOG"
     fi
+
+          # FLAIR
+        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.gtf"
+        if [ ! -f "$FLAIR_PATH" ]; then
+            log_message "Running Flair for $NAME..." "${YELLOW}"
+            activate_env "$ENV_FLAIR"
+            time bash ~/nano-pipe/ID/flairscript.sh "$NAME"
+        else
+            log_message "Flair output file exists. Skipping Flair..." "${YELLOW}"
+        fi
+
+    else
+        log_message "File ${BAM_FILE} does not exist. Writing to log file ${ID_LOG}..." "${RED}"
+        echo "File ${BAM_FILE} does not exist." >> "$ID_LOG"
+    fi
+
 }
 ALL_ID() {
     local NAME="$SAMPLE"
@@ -118,14 +134,14 @@ ALL_ID() {
         fi
 
         # ESPRESSO
-        ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
-        if [ ! -f "$ESPRESSO_PATH" ]; then
-            log_message "Running ESPRESSO for $NAME..." "${YELLOW}"
-            activate_env "$ENV_ESPRESSO"
-            time bash ~/nano-pipe/ID/espressoscript.sh "$NAME" > /dev/null
-        else
-            log_message "Espresso output files exist. Skipping Espresso..." "${YELLOW}"
-        fi
+       # ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
+        #if [ ! -f "$ESPRESSO_PATH" ]; then
+         #   log_message "Running ESPRESSO for $NAME..." "${YELLOW}"
+         #   activate_env "$ENV_ESPRESSO"
+         #   time bash ~/nano-pipe/ID/espressoscript.sh "$NAME" > /dev/null
+       # else
+        #    log_message "Espresso output files exist. Skipping Espresso..." "${YELLOW}"
+      #  fi
 
         # FLAIR
         FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.gtf"
