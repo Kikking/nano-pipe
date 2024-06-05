@@ -70,7 +70,7 @@ QUICK_ID() {
     fi
 
           # FLAIR
-        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.gtf"
+        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.isoforms.gtf"
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "${YELLOW}"
             activate_env "$ENV_FLAIR"
