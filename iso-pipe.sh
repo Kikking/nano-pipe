@@ -4,7 +4,6 @@ INPUT_FILE=$1
 QUICK=${2:-f}
 NOVEL=${3:-f}
 
-
 # Define log file paths
 ID_LOG="ALL_ID.log"
 MAP_LOG="MAPPING.log"
@@ -24,6 +23,12 @@ YELLOW=$(tput setaf 3)    # Yellow text for warning messages
 GREEN=$(tput setaf 2)     # Green text for success messages
 RESET=$(tput sgr0)        # Reset text formatting
 
+#checks if novel stuff is present when running in novel mode
+if [ $NOVEL == "novel" ];then
+    OUT="novel/"
+else
+    OUT=""
+fi
 # Function to activate Conda environment
 activate_env() {
     local env_name="$1"
@@ -47,7 +52,7 @@ QUICK_ID() {
         log_message "File ${NAME}.bam exists. Proceeding..." "${GREEN}"
 
         # STRINGTIE
-        STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf"
+        STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$STRING_PATH" ]; then
             log_message "Running STRINGTIE for $NAME..." "${YELLOW}"
             time bash ~/nano-pipe/ID/string.sh "$NAME" $NOVEL
@@ -57,7 +62,7 @@ QUICK_ID() {
         fi
 
         # ISOQUANT
-        ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.gtf"
+        ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$ISOQUANT_PATH" ]; then
             log_message "Running isoQUANT for $NAME..." "${YELLOW}"
             activate_env "$ENV_ISOQUANT"
@@ -72,7 +77,7 @@ QUICK_ID() {
     fi
 
           # FLAIR
-        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.isoforms.gtf"
+        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.isoforms.gtf"
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "${YELLOW}"
             activate_env "$ENV_FLAIR"
@@ -90,7 +95,7 @@ ALL_ID() {
         log_message "File ${NAME}.bam exists. Proceeding..." "${GREEN}"
 
         # STRINGTIE
-        STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf"
+        STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$STRING_PATH" ]; then
             log_message "Running STRINGTIE for $NAME..." "${YELLOW}"
             time bash ~/nano-pipe/ID/string.sh "$NAME" $NOVEL
@@ -100,7 +105,7 @@ ALL_ID() {
         fi
 
         # ISOQUANT
-        ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/${NAME}/${NAME}.gtf"
+        ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$ISOQUANT_PATH" ]; then
             log_message "Running isoQUANT for $NAME..." "${YELLOW}"
             activate_env "$ENV_ISOQUANT"
@@ -121,7 +126,7 @@ ALL_ID() {
         fi
 
         # TALON
-        TALON_PATH="/mnt/d/SGNEX/GTF_files/talon/${NAME}/${NAME}.gtf"
+        TALON_PATH="/mnt/d/SGNEX/GTF_files/talon/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$TALON_PATH" ]; then
             log_message "Running TALON for $NAME..." "${YELLOW}"
             activate_env "$ENV_TALON"
@@ -141,7 +146,7 @@ ALL_ID() {
       #  fi
 
         # FLAIR
-        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${NAME}/${NAME}.gtf"
+        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.gtf"
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "${YELLOW}"
             activate_env "$ENV_FLAIR"
