@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SAMPLE=$1
+INPUT_FILE=$1
 QUICK=${2:-f}
 NOVEL=${3:-f}
 
@@ -179,11 +179,15 @@ MAPPING() {
 }
 
 # Call the functions
-MAPPING
 
-if [ $QUICK == "q" ];then
-QUICK_ID 
-else
-ALL_ID
-fi
+while read -r SAMPLE _; do
 
+    MAPPING
+
+    if [ $QUICK == "q" ];then
+        QUICK_ID 
+    else
+        ALL_ID
+    fi
+
+done < "$INPUT_FILE"
