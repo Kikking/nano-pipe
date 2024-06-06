@@ -17,7 +17,7 @@ echo "________NOVEL BEGIN___________"
 
 stripped="${NAME#sd}"
 TAG="${stripped%%_*}"
-ANNO="/home/kikking/novel_realm/novel/NOVEL_${TAG}_gencode45_chrIS_SIRV.gtf"
+ANNO="/home/kikking/novel_realm/novel/NOVEL_${TAG}_gencode45_chrIS_SIRV.db"
 OUT=isoquant/novel
 
 else 
