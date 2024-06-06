@@ -10,10 +10,16 @@ NOVEL_ANNO=/mnt/e/refData/current/gencode45_novel.db
 NAME=$1
 NOVEL=${2-f}
 
+
+
 if [ $NOVEL == "novel" ];then
 echo "________NOVEL BEGIN___________"
-ANNO=$NOVEL_ANNO
+
+stripped="${NAME#sd}"
+TAG="${stripped%%_*}"
+ANNO="/home/kikking/novel_realm/novel/NOVEL_${TAG}_gencode45_chrIS_SIRV.gtf"
 OUT=isoquant/novel
+
 else 
 echo "________NORMAL BEGIN___________"
 ANNO=$SIRV_ANNO

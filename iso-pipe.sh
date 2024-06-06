@@ -2,6 +2,7 @@
 
 SAMPLE=$1
 QUICK=${2:-f}
+NOVEL=${3:-f}
 
 
 # Define log file paths
@@ -38,6 +39,7 @@ log_message() {
 
 # Function to perform ID tasks
 QUICK_ID() {
+    local NOVEL=$NOVEL
     local NAME="$SAMPLE"
     local BAM_FILE="/mnt/d/SGNEX/mini_bam/${NAME}.bam"
 
@@ -48,7 +50,7 @@ QUICK_ID() {
         STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf"
         if [ ! -f "$STRING_PATH" ]; then
             log_message "Running STRINGTIE for $NAME..." "${YELLOW}"
-            time bash ~/nano-pipe/ID/string.sh "$NAME"
+            time bash ~/nano-pipe/ID/string.sh "$NAME" $NOVEL
             bash ~/nano-pipe/template.sh "$NAME" STRINGTIE
         else
             log_message "STRING file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
@@ -59,7 +61,7 @@ QUICK_ID() {
         if [ ! -f "$ISOQUANT_PATH" ]; then
             log_message "Running isoQUANT for $NAME..." "${YELLOW}"
             activate_env "$ENV_ISOQUANT"
-            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME" $NOVEL
             bash ~/nano-pipe/template.sh "$NAME" ISOQUANT
         else
             log_message "isoQUANT file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
@@ -74,12 +76,13 @@ QUICK_ID() {
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "${YELLOW}"
             activate_env "$ENV_FLAIR"
-            time bash ~/nano-pipe/ID/flairscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/flairscript.sh "$NAME" $NOVEL
         else
             log_message "Flair output file exists. Skipping Flair..." "${YELLOW}"
         fi
 }
 ALL_ID() {
+    local NOVEL=$NOVEL
     local NAME="$SAMPLE"
     local BAM_FILE="/mnt/d/SGNEX/mini_bam/${NAME}.bam"
 
@@ -90,7 +93,7 @@ ALL_ID() {
         STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/${NAME}/${NAME}.gtf"
         if [ ! -f "$STRING_PATH" ]; then
             log_message "Running STRINGTIE for $NAME..." "${YELLOW}"
-            time bash ~/nano-pipe/ID/string.sh "$NAME"
+            time bash ~/nano-pipe/ID/string.sh "$NAME" $NOVEL
             bash ~/nano-pipe/template.sh "$NAME" STRINGTIE
         else
             log_message "STRING file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
@@ -101,7 +104,7 @@ ALL_ID() {
         if [ ! -f "$ISOQUANT_PATH" ]; then
             log_message "Running isoQUANT for $NAME..." "${YELLOW}"
             activate_env "$ENV_ISOQUANT"
-            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/isoqscript.sh "$NAME" $NOVEL
             bash ~/nano-pipe/template.sh "$NAME" ISOQUANT
         else
             log_message "isoQUANT file ${NAME}.gtf exists. Skipping..." "${YELLOW}"
@@ -111,7 +114,7 @@ ALL_ID() {
         BAMBU_PATH="/mnt/d/SGNEX/GTF_files/bambu/${NAME}/extended_annotations.gtf"
         if [ ! -f "$BAMBU_PATH" ]; then
             log_message "Running BAMBU for $NAME..." "${YELLOW}"
-            time Rscript ~/nano-pipe/ID/bambush.R "$NAME"
+            time Rscript ~/nano-pipe/ID/bambush.R "$NAME" $NOVEL
             bash ~/nano-pipe/template.sh "$NAME" BAMBU
         else
             log_message "BAMBU file ${NAME} exists. Skipping..." "${YELLOW}"
@@ -122,7 +125,7 @@ ALL_ID() {
         if [ ! -f "$TALON_PATH" ]; then
             log_message "Running TALON for $NAME..." "${YELLOW}"
             activate_env "$ENV_TALON"
-            time bash ~/nano-pipe/ID/talonscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/talonscript.sh "$NAME" $NOVEL
         else
             log_message "TALON output file exists. Skipping TALON..." "${YELLOW}"
         fi
@@ -142,7 +145,7 @@ ALL_ID() {
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "${YELLOW}"
             activate_env "$ENV_FLAIR"
-            time bash ~/nano-pipe/ID/flairscript.sh "$NAME"
+            time bash ~/nano-pipe/ID/flairscript.sh "$NAME" $NOVEL
         else
             log_message "Flair output file exists. Skipping Flair..." "${YELLOW}"
         fi
@@ -179,7 +182,7 @@ MAPPING() {
 MAPPING
 
 if [ $QUICK == "q" ];then
-QUICK_ID
+QUICK_ID 
 else
 ALL_ID
 fi

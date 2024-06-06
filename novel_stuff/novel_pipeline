@@ -1,0 +1,10 @@
+
+1. Need to take your list of 1000 simulated transcripts and remove 20% of the IDs from the GTF annotation 
+    Run : bash novel_maker tag (where tag is the transcript-length range)
+    this makes a gtf file for each transcript range thats missing 20% of the expressed isoforms
+
+2. run all the isoform tools again on the old samples, but using the respective novel gtf based on the tag in the file name
+    Run : bash iso-pipe.sh q novel 
+    This puts all new gtf files created in the novel folders of every tool
+
+3. 
