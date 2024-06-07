@@ -1,20 +1,16 @@
 #!/bin/bash
 
+# Define colors using set
+set YELLOW='\033[1;33m'
+set NC='\033[0m' # No Color
+
 NAME=$1
 
-# Define text formatting variables
-RED=$(tput setaf 1)       # Red text for error messages
-YELLOW=$(tput setaf 3)    # Yellow text for warning messages
-GREEN=$(tput setaf 2)     # Green text for success messages
-RESET=$(tput sgr0)        # Reset text formatting
-
-# Function for logging messages with color
 log_message() {
-    local message="$1"
-    local color="$2"
-    echo -e "${color}${message}${RESET}"
+    local MESSAGE="$1"
+    local COLOR="$2"
+    echo -e "${!COLOR}$MESSAGE${NC}"
 }
-
 
 GFFCOMPARE() {
     local NAME="$1"
@@ -30,7 +26,7 @@ GFFCOMPARE() {
 }
 
 # STRINGTIE
-STRING_PATH="/mnt/d/SGNEX/GTF_files/stringtie/novel/${NAME}/${NAME}.filt.gtf"
+STRING_PATH="/mnt/d/SGNEX/gffcmp/stringtie/novel/${NAME}/${NAME}.annotated.gtf"
 if [ ! -f "$STRING_PATH" ]; then
     log_message "Filtering STRINGTIE $NAME..." "YELLOW"
     TOOL="stringtie"
@@ -39,11 +35,11 @@ if [ ! -f "$STRING_PATH" ]; then
     awk '$11 > 0 {print $6}' "$COUNT_FILE" > "/mnt/d/SGNEX/GTF_files/stringtie/novel/${NAME}/${NAME}.trans_list"
     GFFCOMPARE "$NAME" "$TOOL"
 else
-    log_message "STRING file ${NAME}.filt.gtf exists. Skipping..." "YELLOW"
+    log_message "STRING file ${NAME}.annotated.gtf exists. Skipping..." "YELLOW"
 fi
 
 # ISOQUANT
-ISOQUANT_PATH="/mnt/d/SGNEX/GTF_files/isoquant/novel/${NAME}/${NAME}.filt.gtf"
+ISOQUANT_PATH="/mnt/d/SGNEX/gffcmp/isoquant/novel/${NAME}/${NAME}.annotated.gtf"
 if [ ! -f "$ISOQUANT_PATH" ]; then
     log_message "Filtering isoQUANT $NAME..." "YELLOW"
     TOOL="isoquant"
@@ -52,11 +48,11 @@ if [ ! -f "$ISOQUANT_PATH" ]; then
     awk '$2 > 0 {print $1}' "$COUNT_FILE" > "/mnt/d/SGNEX/GTF_files/isoquant/novel/${NAME}/${NAME}.trans_list"
     GFFCOMPARE "$NAME" "$TOOL"
 else
-    log_message "isoQUANT file ${NAME}.filt.gtf exists. Skipping..." "YELLOW"
+    log_message "isoQUANT file ${NAME}.annotated.gtf exists. Skipping..." "YELLOW"
 fi
 
 # BAMBU
-BAMBU_PATH="/mnt/d/SGNEX/GTF_files/bambu/novel/${NAME}/extended_annotations.filt.gtf"
+BAMBU_PATH="/mnt/d/SGNEX/gffcmp/bambu/novel/${NAME}/${NAME}.annotated.gtf"
 if [ ! -f "$BAMBU_PATH" ]; then
     log_message "Filtering BAMBU $NAME..." "YELLOW"
     TOOL="bambu"
@@ -65,11 +61,11 @@ if [ ! -f "$BAMBU_PATH" ]; then
     awk '$3 > 0 {print $1}' "$COUNT_FILE" > "/mnt/d/SGNEX/GTF_files/bambu/novel/${NAME}/${NAME}.trans_list"
     GFFCOMPARE "$NAME" "$TOOL"
 else
-    log_message "BAMBU file ${NAME}.filt.gtf exists. Skipping..." "YELLOW"
+    log_message "BAMBU file ${NAME}.annotated.gtf exists. Skipping..." "YELLOW"
 fi
 
 # TALON
-TALON_PATH="/mnt/d/SGNEX/GTF_files/talon/novel/${NAME}/${NAME}.filt.gtf"
+TALON_PATH="/mnt/d/SGNEX/gffcmp/talon/novel/${NAME}/${NAME}.annotated.gtf"
 if [ ! -f "$TALON_PATH" ]; then
     log_message "Filtering TALON $NAME..." "YELLOW"
     TOOL="talon"
@@ -82,7 +78,7 @@ else
 fi
 
 # FLAIR
-FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/novel/${NAME}/${NAME}.filt.gtf"
+FLAIR_PATH="/mnt/d/SGNEX/gffcmp/flair/novel/${NAME}/${NAME}.annotated.gtf"
 if [ ! -f "$FLAIR_PATH" ]; then
     log_message "Filtering Flair $NAME..." "YELLOW"
     TOOL="flair"
