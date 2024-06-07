@@ -1,15 +1,17 @@
 #!/bin/bash
-
-# Define colors using set
-set YELLOW='\033[1;33m'
-set NC='\033[0m' # No Color
-
 NAME=$1
 
+# Define text formatting variables
+RED=$(tput setaf 1)       # Red text for error messages
+YELLOW=$(tput setaf 3)    # Yellow text for warning messages
+GREEN=$(tput setaf 2)     # Green text for success messages
+RESET=$(tput sgr0)        # Reset text formatting
+
+# Function for logging messages with color
 log_message() {
-    local MESSAGE="$1"
-    local COLOR="$2"
-    echo -e "${!COLOR}$MESSAGE${NC}"
+    local message="$1"
+    local color="$2"
+    echo -e "${color}${message}${RESET}"
 }
 
 GFFCOMPARE() {
