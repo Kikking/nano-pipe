@@ -14,9 +14,10 @@ STAR --runMode alignReads \
      --genomeDir "$INDEX" \
      --readFilesIn "$READ1" "$READ2" \
      --runThreadN 8 \
-     --genomeLoad LoadAndRemove \
      --genomeChrBinNbits "$GENOME_CHR_BIN_NBITS" \
      --genomeSAindexNbases 10 \
      --genomeSAsparseD 2 \
      --outSAMtype BAM SortedByCoordinate \
      --outFileNamePrefix /mnt/e/star_stuff/${NAME}/${NAME}_
+
+      # --genomeLoad LoadAndRemove \
