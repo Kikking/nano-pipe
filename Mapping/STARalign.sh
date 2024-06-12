@@ -1,9 +1,10 @@
 #!/bin/bash
+NAME=$1 
 
 # Define variables
 INDEX="/mnt/e/refData/STAR_index"
-READ1="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate5_run1/SGNex_Hct116_Illumina_replicate5_run1_R1_val_1.fq"
-READ2="/mnt/d/barbet/trim/SGNex_Hct116_Illumina_replicate5_run1/SGNex_Hct116_Illumina_replicate5_run1_R2_val_2.fq"
+READ1="/mnt/d/barbet/trim/${NAME}/${NAME}_R1_val_1.fq"
+READ2="/mnt/d/barbet/trim/${NAME}/${NAME}_R2_val_2.fq"
 
 # Calculate genomeChrBinNbits value (replace this with a constant integer)
 GENOME_CHR_BIN_NBITS=18
@@ -12,8 +13,10 @@ GENOME_CHR_BIN_NBITS=18
 STAR --runMode alignReads \
      --genomeDir "$INDEX" \
      --readFilesIn "$READ1" "$READ2" \
-     --runThreadN 6 \
+     --runThreadN 8 \
      --genomeLoad LoadAndRemove \
      --genomeChrBinNbits "$GENOME_CHR_BIN_NBITS" \
      --genomeSAindexNbases 10 \
-     --genomeSAsparseD 2
+     --genomeSAsparseD 2 \
+     --outSAMtype BAM \
+     --outFileNamePrefix /mnt/e/star_stuff/${NAME}/${NAME}_
