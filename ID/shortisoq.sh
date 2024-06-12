@@ -7,14 +7,20 @@ SIRV_ANNO=/home/kikking/long_realm/ref/gencode45_chrIS_SIRV.db
 
 TAG=$1 # Either Hc, H, A, K
 
-echo "Indexing..."
-time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam
+#echo "Indexing..."
+#time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam
 
 echo "Quantifying..."
+echo "__________SHORT__________________"
+echo /mnt/d/SGNEX/short_bam/${TAG}_*.bam
+echo "_________________________________"
+echo "___________LONG__________________"
+echo /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam 
+echo "_________________________________"
 isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --prefix $TAG \
 --complete_genedb \
---no_model_construction \ #No novel reporting
+--no_model_construction \ 
 --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam \
