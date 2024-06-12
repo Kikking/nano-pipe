@@ -20,7 +20,7 @@ echo "_________________________________"
 isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --prefix $TAG \
 --complete_genedb \
---no_model_construction \ 
+--no_model_construction \
 --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam \
