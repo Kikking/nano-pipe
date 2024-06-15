@@ -24,7 +24,7 @@ isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --force \
 -t 8 --high_memory \
 --bam /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam \
---illumina_bam /mnt/d/SGNEX/short_bam/${TAG}_*.bam \
+--illumina_bam /mnt/e/barbet/${TAG}_*.bam \
 --data_type nanopore -o /mnt/d/SGNEX/GTF_files/isoquant/${TAG}/ 
 
 echo "Renaming..."
