@@ -12,10 +12,10 @@ TAG=$1 # Either Hc, H, A, K
 
 echo "Quantifying..."
 echo "__________SHORT__________________"
-echo /mnt/d/SGNEX/short_bam/${TAG}_*.bam
+echo /mnt/e/barbet/short_bam/${TAG}_*.bam
 echo "_________________________________"
 echo "___________LONG__________________"
-echo /mnt/e/barbet/short_bam/${TAG}_*.bam 
+echo /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam 
 echo "_________________________________"
 isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --prefix $TAG \
