@@ -9,6 +9,8 @@ TAG=$1 # Either Hc, H, A, K
 
 #echo "Indexing..."
 #time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam
+echo "Indexing..."
+time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam  
 
 echo "Quantifying..."
 echo "__________SHORT__________________"
@@ -17,6 +19,7 @@ echo "_________________________________"
 echo "___________LONG__________________"
 echo /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam 
 echo "_________________________________"
+
 isoquant.py --reference $SIRV_REF --genedb $SIRV_ANNO \
 --prefix $TAG \
 --complete_genedb \
