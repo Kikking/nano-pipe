@@ -10,7 +10,7 @@ TAG=$1 # Either Hc, H, A, K
 #echo "Indexing..."
 #time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam
 echo "Indexing..."
-time samtools index /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam  
+time samtools index -M /mnt/d/SGNEX/mini_bam/${TAG}_d*.bam  
 
 echo "Quantifying..."
 echo "__________SHORT__________________"
