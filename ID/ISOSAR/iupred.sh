@@ -9,7 +9,7 @@ mkdir -p "$output_dir"
 mkdir -p "$split_dir"
 echo "splitting FASTA..."
 #!/bin/bash
-in=/mnt/d/ISOSAR_files/${ID}/isoformSwitchAnalyzeR_isoform_AA_complete.fasta
+in=/mnt/d/ISOSAR_files/${ID}/isoformSwitchAnalyzeR_isoform_AA.fasta
 
 awk '/^>/ {
     if (seq) print seq > seq_file;
@@ -36,3 +36,4 @@ for seq_file in "$split_dir"/*.fasta; do
  -d /mnt/d/ISOSAR_software/iupred2a/ $seq_file \
  long | awk -v header="$header" 'BEGIN {print header} {print}' \
  > "$output_dir/$seq_name.txt"   
+done
