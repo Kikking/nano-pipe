@@ -31,7 +31,7 @@ echo "Running IUPred2A..."
 # Loop through each split sequence file and run IUPred2A
 for seq_file in "$split_dir"/*.fasta; do
     # Extract the sequence name (base name without extension)
-    seq_name=$(basename "$seq_file" .fasta)
+    seq_name=$(basename "$seq_file" _.fasta)
     # Create a header for the output
     header=">${seq_name}\n# POS\tAMINO ACID\tIUPRED SCORE\tANCHOR SCORE\n"
     # Run IUPred2A on the sequence file and include the sequence name in the output
