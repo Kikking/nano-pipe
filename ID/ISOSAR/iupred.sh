@@ -3,7 +3,7 @@ ID=$1
 
 
 echo "splitting FASTA..."
-bash ~/nano-pipe/ID/ISOSAR/fasta_splitter.sh $ID
+bash ~/nano-pipe/ID/ISOSAR/fasta-splitter.sh $ID
 
 # Directory containing split sequences
 split_dir=/mnt/d/ISOSAR_files/${ID}/fasta_split/
