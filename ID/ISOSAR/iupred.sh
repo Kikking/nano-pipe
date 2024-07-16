@@ -15,14 +15,14 @@ awk '/^>/ {
     if (seq) print seq > seq_file;
     seq_name=substr($0, 2);
     gsub(/[^a-zA-Z0-9.]/, "_", seq_name);  # Replace non-alphanumeric characters except period with underscore
-    seq_file="$split_dir" seq_name ".fasta";
+    seq_file=seq_name ".fasta";
     seq="";
     next
 }
 {seq=seq"\n"$0}
 END {
     if (seq) print seq > seq_file;
-}' "$in"
+}' "$in" > $split_dir
 
 echo "IUPREDING..."
 
