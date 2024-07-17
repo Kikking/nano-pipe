@@ -10,7 +10,7 @@ bash ~/nano-pipe/ID/ISOSAR/fasta-splitter.sh $ID
 
 echo "Running PFAM"
 counter=0
-for file in /mnt/d/ISOSAR_files/${ID}/fasta_split/*; do
+for file in /mnt/d/ISOSAR_files/${ID}/pfam_split/*; do
 ((counter++))
     echo "$counter"
     # Run pfam_scan.pl on current chunk file

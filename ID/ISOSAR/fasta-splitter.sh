@@ -2,10 +2,10 @@
 
 # Function to split FASTA file into smaller files by number of sequences
     ID=$1
-    mkdir /mnt/d/ISOSAR_files/${ID}/fasta_split/
+    mkdir /mnt/d/ISOSAR_files/${ID}/pfam_split/
     input_file=/mnt/d/ISOSAR_files/${ID}/isoformSwitchAnalyzeR_isoform_AA.fasta
     sequences_per_file=1
-    output_prefix=/mnt/d/ISOSAR_files/${ID}/fasta_split/split
+    output_prefix=/mnt/d/ISOSAR_files/${ID}/pfam_split/split
 
     # Initialize counters
     sequence_count=0
