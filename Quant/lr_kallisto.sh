@@ -1,15 +1,18 @@
 #!/bin/bash
 
-GTF=/home/kikking/long_realm/ref/gencode45_chrIS_SIRV.db
+#Reference Files
+GTF=/home/kikking/long_realm/ref/gencode45_chrIS_SIRV.gtf
+INDEX=/mnt/e/refData/kallindex/transcriptome_chr1S_SIRV.fa.idx
+
+#Input and Output destinations
 TARGET=$1
+OUTPUT=/mnt/d/SGNEX/quant/kallisto/${TARGET}
+mkdir -p ${OUTPUT}
 
-mkdir /mnt/d/SGNEX/quant/kallisto/${TARGET}
+#Genarate cm
 
-kallisto bus /mnt/d/SGNEX/fq/$TARGET.fastq \
--o /mnt/d/SGNEX/quant/kallisto/${TARGET}/ \
--p ONT \
--i /mnt/e/refData/kallindex/transcriptome_chr1S_SIRV.fa.idx \
---gtf $GTF \
+kallisto quant --long -P ONT \
+-i $INDEX \
+-o $OUTPUT \
 -t 10 \
---long
-
+/mnt/d/SGNEX/fq/${TARGET}.fastq
