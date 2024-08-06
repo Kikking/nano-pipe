@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TARGET=$1
-OUTPUT=/mnt/d/quant/oarfish/${TARGET}
+OUTPUT=/mnt/d/SGNEX/quant/oarfish/${TARGET}/${TARGET}
 mkdir -p ${OUTPUT}
 
 oarfish \
