@@ -8,7 +8,6 @@ minimap2 -ax splice $REF -t 8 --MD /mnt/d/SGNEX/fq/${NAME}.fastq | samtools view
 
 
 OUTPUT=/mnt/d/SGNEX/quant/oarfish/${NAME}/${NAME}
-mkdir -p ${OUTPUT}
 
 oarfish \
     -a /mnt/d/SGNEX/trans_bam/${NAME}.bam \
