@@ -191,10 +191,10 @@ LR_KALLISTO() {
         log_message "File ${FASTQ_FILE} exists. Proceeding..." "$GREEN"
 
         if [ ! -f "$KALLISTO_PATH" ]; then
-            log_message "Running lr-kallisto for $NAME..." "$YELLOW"
-            time bash ~/nano-pipe/Quant/lr-kallisto.sh "$FASTQ_FILE"
+            log_message "Running lr_kallisto for $NAME..." "$YELLOW"
+            time bash ~/nano-pipe/Quant/lr_kallisto.sh "$FASTQ_FILE"
         else
-            log_message "lr-kallisto quant file ${NAME}.quant exists. Skipping..." "$YELLOW"
+            log_message "lr_kallisto quant file ${NAME}.quant exists. Skipping..." "$YELLOW"
         fi
 
     else
