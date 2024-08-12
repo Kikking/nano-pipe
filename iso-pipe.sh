@@ -231,14 +231,20 @@ while read -r SAMPLE _; do
     MAPPING
 
     if [ "$QUICK" == "q" ]; then
+        
         QUICK_ID 
+         if [ "$QUANT" == "quant" ]; then
+            LR_KALLISTO
+            OARFISH
+        fi
     else
         ALL_ID
+         if [ "$QUANT" == "quant" ]; then
+            LR_KALLISTO
+            OARFISH
+        fi
     fi
 
-    if [ "$QUANT" == "quant" ]; then
-        LR_KALLISTO
-        OARFISH
-    fi
+   
 
 done < "$INPUT_FILE"
