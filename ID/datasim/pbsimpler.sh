@@ -22,7 +22,7 @@ run_pbsim() {
 
     while [ "$retry" -lt "$max_retries" ]; do
         if pbsim --strategy trans --method errhmm \
-            --errhmm ~/pbsim3-3.0.4/data/ERRHMM-ONT.model \
+            --errhmm ~/pbsim3-3.0.4/data/ERRHMM-ONT-HQ.model \
             --transcript "${SAMPLE_FILE}_${COUNT}" \
             --prefix "/mnt/d/SGNEX/fq/sd${TAG}_${COUNT}_${LENGTH}-${LENGTHSD}_${ACCURACY}"  \
             --length-mean $LENGTH \
