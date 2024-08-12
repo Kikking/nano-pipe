@@ -85,14 +85,14 @@ QUICK_ID() {
     fi
 
     # FLAIR
-    FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.isoforms.gtf"
-    if [ ! -f "$FLAIR_PATH" ]; then
-        log_message "Running Flair for $NAME..." "$YELLOW"
-        activate_env "$ENV_FLAIR"
-        time bash ~/nano-pipe/ID/flairscript.sh "$NAME" "$NOVEL"
-    else
-        log_message "Flair output file exists. Skipping Flair..." "$YELLOW"
-    fi
+   # FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.isoforms.gtf"
+   # if [ ! -f "$FLAIR_PATH" ]; then
+    #    log_message "Running Flair for $NAME..." "$YELLOW"
+    #    activate_env "$ENV_FLAIR"
+      #  time bash ~/nano-pipe/ID/flairscript.sh "$NAME" "$NOVEL"
+   # else
+   #     log_message "Flair output file exists. Skipping Flair..." "$YELLOW"
+   # fi
 }
 
 ALL_ID() {
@@ -192,7 +192,7 @@ LR_KALLISTO() {
 
         if [ ! -f "$KALLISTO_PATH" ]; then
             log_message "Running lr_kallisto for $NAME..." "$YELLOW"
-            time bash ~/nano-pipe/Quant/lr_kallisto.sh "$FASTQ_FILE"
+            time bash ~/nano-pipe/Quant/lr_kallisto.sh "$NAME"
         else
             log_message "lr_kallisto quant file ${NAME}.quant exists. Skipping..." "$YELLOW"
         fi
@@ -214,7 +214,7 @@ OARFISH() {
 
         if [ ! -f "$OARFISH_PATH" ]; then
             log_message "Running oarfish for $NAME..." "$YELLOW"
-            time bash ~/nano-pipe/Quant/oarfish.sh "$FASTQ_FILE"
+            time bash ~/nano-pipe/Quant/oarfish.sh "$NAME"
         else
             log_message "oarfish quant file ${NAME}.quant exists. Skipping..." "$YELLOW"
         fi
