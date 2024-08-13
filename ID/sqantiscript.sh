@@ -50,12 +50,11 @@ python ~/SQANTI3/sqanti3_qc.py \
   -d "/mnt/d/SGNEX/sqantout/${KEY}/${TARGET}/" \
   --polyA_motif_list ~/SQANTI3/data/polyA_motifs/mouse_and_human.polyA_motif.txt \
   --CAGE_peak ~/SQANTI3/data/ref_TSS_annotation/human.refTSS_v3.1.hg38.bed \
- # -c /mnt/e/star_stuff/rep${REP}/SJ.out.tab \
   --skipORF \
   --cpus 10 \
   --report pdf
 
-
+ # -c /mnt/e/star_stuff/rep${REP}/SJ.out.tab \
 
 #conda activate SQANTI3.env
 
