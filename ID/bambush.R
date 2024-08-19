@@ -4,7 +4,7 @@ library(bambu)
 args <- commandArgs(trailingOnly = TRUE)
 sample <- args[1]
 
-fa.file <- "//wsl.localhost/Ubuntu-22.04/home/kikking/long_realm/ref/GRCh38.p14_chr1S_SIRV.fa"
+fa.file <- "~/long_realm/ref/GRCh38.p14_chr1S_SIRV.fa"
 gtf.file <- "/mnt/e/refData/current/gencode45_chrIS_SIRV.gtf"
 
 annotations <- readRDS("/mnt/e/refData/current/gencode45_chrIS_SIRV_annotations.rds")
