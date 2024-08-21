@@ -143,7 +143,7 @@ ALL_ID() {
         else
             log_message "TALON output file exists. Skipping TALON..." "$YELLOW"
         fi
-          ESPRESSO
+          #ESPRESSO
         ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
         if [ ! -f "$ESPRESSO_PATH" ]; then
             log_message "Running ESPRESSO for $NAME..." "${YELLOW}"
