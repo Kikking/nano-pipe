@@ -127,6 +127,7 @@ ALL_ID() {
         BAMBU_PATH="/mnt/d/SGNEX/GTF_files/bambu/${NAME}/extended_annotations.gtf"
         if [ ! -f "$BAMBU_PATH" ]; then
             log_message "Running BAMBU for $NAME..." "$YELLOW"
+            conda deactivate
             time Rscript ~/nano-pipe/ID/bambush.R "$NAME" "$NOVEL"
             bash ~/nano-pipe/template.sh "$NAME" BAMBU
         else
@@ -141,6 +142,15 @@ ALL_ID() {
             time bash ~/nano-pipe/ID/talonscript.sh "$NAME" "$NOVEL"
         else
             log_message "TALON output file exists. Skipping TALON..." "$YELLOW"
+        fi
+          ESPRESSO
+        ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
+        if [ ! -f "$ESPRESSO_PATH" ]; then
+            log_message "Running ESPRESSO for $NAME..." "${YELLOW}"
+            activate_env "$ENV_ESPRESSO"
+            time bash ~/nano-pipe/ID/espressoscript.sh "$NAME" > /dev/null
+        else
+            log_message "Espresso output files exist. Skipping Espresso..." "${YELLOW}"
         fi
 
         # FLAIR
