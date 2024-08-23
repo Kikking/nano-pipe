@@ -154,7 +154,7 @@ ALL_ID() {
         #fi
 
         # FLAIR
-        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.gtf"
+        FLAIR_PATH="/mnt/d/SGNEX/GTF_files/flair/${OUT}${NAME}/${NAME}.isoforms.gtf"
         if [ ! -f "$FLAIR_PATH" ]; then
             log_message "Running Flair for $NAME..." "$YELLOW"
             activate_env "$ENV_FLAIR"
