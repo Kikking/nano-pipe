@@ -135,14 +135,14 @@ ALL_ID() {
         fi
 
         # TALON
-        TALON_PATH="/mnt/d/SGNEX/GTF_files/talon/${OUT}${NAME}/${NAME}.gtf"
-        if [ ! -f "$TALON_PATH" ]; then
-            log_message "Running TALON for $NAME..." "$YELLOW"
-            activate_env "$ENV_TALON"
-            time bash ~/nano-pipe/ID/talonscript.sh "$NAME" "$NOVEL"
-        else
-            log_message "TALON output file exists. Skipping TALON..." "$YELLOW"
-        fi
+       # TALON_PATH="/mnt/d/SGNEX/GTF_files/talon/${OUT}${NAME}/${NAME}.gtf"
+        #if [ ! -f "$TALON_PATH" ]; then
+         #   log_message "Running TALON for $NAME..." "$YELLOW"
+          #  activate_env "$ENV_TALON"
+         #   time bash ~/nano-pipe/ID/talonscript.sh "$NAME" "$NOVEL"
+        #else
+         #   log_message "TALON output file exists. Skipping TALON..." "$YELLOW"
+    #    fi
           #ESPRESSO
        # ESPRESSO_PATH="/mnt/d/SGNEX/GTF_files/espresso/${NAME}/${NAME}.gtf"
         #if [ ! -f "$ESPRESSO_PATH" ]; then
