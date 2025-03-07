@@ -12,7 +12,7 @@ echo "******************************************************************"
 echo $FILE;
 echo "******************************************************************"
 sleep 10
-time tar -xvf $FILE -C /mnt/e/SGNEX/f5/${NAME} 
+#time tar -xvf $FILE -C /mnt/e/SGNEX/f5/${NAME} 
 echo "<<<<<<<<<<<<<<<<<<<UNTAR COMPLETE>>>>>>>>>>>>>>>>>>>>>>>>"
 
 #Check if multi or single file
