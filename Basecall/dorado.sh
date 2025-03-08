@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-MODEL=dna_r9.4.1_e8_hac@v3.3
+MODEL=rna002_70bps_hac@v3
 
 pip install NanoPlot --upgrade append 2>/dev/null #Check np needs updgrade
 NanoPlot -v #check np version
